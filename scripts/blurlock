@@ -1,0 +1,5 @@
+#!/bin/bash
+maim -m 1 /tmp/screenshot.png
+convert /tmp/screenshot.png -scale 10% -blur 0x0.5 -resize 1000% /tmp/screenshotblur.png
+rm /tmp/screenshot.png
+i3lock -i /tmp/screenshotblur.png
