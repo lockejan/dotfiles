@@ -113,3 +113,4 @@ function reload_gtk_theme() {
 }
 
 alias config='/usr/bin/git --git-dir=/home/smittie/.cfg/ --work-tree=/home/smittie'
+alias vifm='.config/vifm/scripts/vifmrun'
