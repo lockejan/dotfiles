@@ -30,7 +30,7 @@ bindsym $mod+Shift+q kill
 # Startup Apps
 exec --no-startup-id redshift -l 51.20:6.80 -t 5600:3400
 exec --no-startup-id nextcloud &
-exec --no-startup-id compton -b &
+exec --no-startup-id compton --config ~/.config/compton/compton.conf &
 
 # Start Applications
 bindsym $mod+F1 exec firefox
