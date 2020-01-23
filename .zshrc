@@ -112,5 +112,5 @@ function reload_gtk_theme() {
   gsettings set org.gnome.desktop.interface gtk-theme $theme
 }
 
-alias config='/usr/bin/git --git-dir=/home/smittie/.cfg/ --work-tree=/home/smittie'
-alias vifm='.config/vifm/scripts/vifmrun'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias vifm='~/.config/vifm/scripts/vifmrun'
