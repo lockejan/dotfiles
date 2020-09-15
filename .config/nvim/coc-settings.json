@@ -1,0 +1,9 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "typescript", "html", "yaml", "json", "python"],
+    "eslint.autoFixOnSave": true,
+    "eslint.filetypes": [ "javascript", "javascriptreact", "typescript", "typescriptreact" ],
+    // Python config
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.jediEnabled": false
+}

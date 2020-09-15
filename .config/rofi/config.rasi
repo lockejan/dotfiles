@@ -1,0 +1,7 @@
+configuration {
+ modi: "window,drun,run,ssh,combi";
+ theme: "gruvbox-dark";
+ combi-modi: "window,drun,run,ssh";
+ terminal: "st";
+ run-shell-command: "{terminal} -e {cmd}";
+ }

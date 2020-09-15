@@ -1,0 +1,48 @@
+#!/bin/bash
+# Toggle between 2.4G and 5G Network if available 
+function getConnectedSSID(){
+    echo $(nmcli c | sed -n '2 p' | awk '{print $1}')
+}
+
+function getNetworkSuffix(){
+    if [[ "$SSID" != *5G ]]; then
+        echo "_5G"
+    else
+        echo ""
+    fi
+}
+
+function updateSSID(){
+    echo $SSID | awk -F_ '{print $1}'
+}
+
+function getUUID(){
+    echo $(nmcli c | rg "$SSID$SUFFIX " | awk '{print $2}')
+}
+
+function tryToSwitchNetwork(){
+    if [ "$UUID" != "" ]; then
+        echo $(nmcli c up uuid $UUID) &> /dev/null
+        echo "switched to $SSID$SUFFIX"
+    else
+        echo "no alternative network available"
+    fi
+}
+
+SSID=$(getConnectedSSID)
+# echo "CURRENT SSID: $SSID"
+
+SUFFIX=$(getNetworkSuffix)
+# echo "SUFFIX: $SUFFIX"
+
+if [ "$SUFFIX" == "" ]; then
+    SSID=$(updateSSID)
+fi
+
+UUID=$(getUUID)
+# echo "UUID: $UUID"
+
+tryToSwitchNetwork
+
+# SSID=$(getConnectedSSID)
+# echo "NEW SSID: $SSID"

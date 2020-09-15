@@ -1,0 +1,358 @@
+# vim: filetype=i3config
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+set $mod Mod4
+
+# Hide borders
+hide_edge_borders smart_no_gaps
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Overpass Display, FontAwesome5Free, FontAwesome5Brands 13
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+set $term alacritty
+bindsym $mod+Return exec $term
+
+# kill focused window
+bindsym $mod+q kill
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+c split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+Shift+a focus parent
+
+# focus the child container
+bindsym $mod+a focus child
+
+#navigate workspaces next / previous
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+l workspace next
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+h workspace prev
+
+# quick ws toggle
+workspace_auto_back_and_forth yes
+
+# move focus on activation
+focus_on_window_activation focus
+
+# set workspace title decoration
+set $ws1 "1:  "
+set $ws2 "2:  "
+set $ws3 "3:  "
+set $ws4 "4:  "
+set $ws5 "5:  "
+set $ws6 "6:  "
+set $ws7 "7:  "
+set $ws8 "8:  "
+set $ws9 "9:  "
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+bindsym $mod+mod2+KP_1 workspace $ws1
+bindsym $mod+mod2+KP_2 workspace $ws2
+bindsym $mod+mod2+KP_3 workspace $ws3
+bindsym $mod+mod2+KP_4 workspace $ws4
+bindsym $mod+mod2+KP_5 workspace $ws5
+bindsym $mod+mod2+KP_6 workspace $ws6
+bindsym $mod+mod2+KP_7 workspace $ws7
+bindsym $mod+mod2+KP_8 workspace $ws8
+bindsym $mod+mod2+KP_9 workspace $ws9
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+
+# move focused container to workspace (numpad)
+bindsym $mod+Shift+mod2+KP_End move container to workspace number $ws1
+bindsym $mod+Shift+mod2+KP_Down move container to workspace number $ws2
+bindsym $mod+Shift+mod2+KP_Next move container to workspace number $ws3
+bindsym $mod+Shift+mod2+KP_Left move container to workspace number $ws4
+bindsym $mod+Shift+mod2+KP_Begin move container to workspace number $ws5
+bindsym $mod+Shift+mod2+KP_Right move container to workspace number $ws6
+bindsym $mod+Shift+mod2+KP_Home move container to workspace number $ws7
+bindsym $mod+Shift+mod2+KP_Up move container to workspace number $ws8
+bindsym $mod+Shift+mod2+KP_Prior move container to workspace number $ws9
+bindsym $mod+Shift+mod2+KP_Insert move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# kill x server
+bindsym $mod+Shift+x exec pkill -15 Xorg
+
+# Set shut down, restart and locking features
+bindsym $mod+0 mode "$mode_system"
+set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing right will grow the window’s width.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+# init dropdown windows
+for_window [instance="dropdown"] floating enable
+# for_window [instance="dropdown"] resize set 1440 900
+for_window [instance="dropdown"] move scratchpad
+exec --no-startup-id $term --class dropdown -e tmux
+bindsym $mod+u [instance="dropdown"] scratchpad show
+#, resize set 1400 1000
+
+# for_window [instance="pomodoro"] floating enable
+# for_window [instance="pomodoro"] move scratchpad
+# exec --no-startup-id gnome-pomodoro --class pomodoro
+# bindsym $mod+i [instance="pomodoro"] scratchpad show
+
+# bindsym $mod+Mod1+d [con_mark="dropdown"] scratchpad show
+# for_window [instance="dropown"] mark "term", move scratchpad
+
+# for_window [instance="spotify"] floating enable
+# for_window [instance="spotify"] move scratchpad
+# exec spotify
+# bindsym $mod+o [instance="spotify"] scratchpad show, resize set 1400 1000
+
+# rofi config
+bindsym $mod+p exec --no-startup-id rofi-pass
+bindsym $mod+d exec --no-startup-id rofi -show combi
+
+# emoji keyboard and calendar
+bindsym $mod+Shift+d exec --no-startup-id rofimoji
+bindsym $mod+udiaeresis exec "yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30"
+
+# Pomodoro
+# reload py3status modules
+# bindsym $mod+F9 exec py3-cmd refresh all
+# bindsym $mod+F10 exec py3-cmd leftclick pomodoro
+# bindsym $mod+F11 exec py3-cmd middleclick pomodoro
+# bindsym $mod+F12 exec py3-cmd rightclick pomodoro
+bindsym $mod+F9 exec i3-gnome-pomodoro start
+bindsym $mod+F10 exec i3-gnome-pomodoro toggle
+bindsym $mod+F11 exec i3-gnome-pomodoro skip
+bindsym $mod+F12 exec i3-gnome-pomodoro stop
+
+
+# Colors
+set_from_resource $black       color0  #000000
+set_from_resource $darkgrey    color8  #000000
+set_from_resource $darkred     color1  #000000
+set_from_resource $red         color9  #000000
+set_from_resource $darkgreen   color2  #000000
+set_from_resource $green       color10 #000000
+set_from_resource $darkyellow  color3  #000000
+set_from_resource $yellow      color11 #000000
+set_from_resource $darkblue    color4  #000000
+set_from_resource $blue        color12 #000000
+set_from_resource $darkmagenta color5  #000000
+set_from_resource $magenta     color13 #000000
+set_from_resource $darkcyan    color6  #000000
+set_from_resource $cyan        color14 #000000
+set_from_resource $lightgrey   color7  #000000
+set_from_resource $lightorange color15 #000000
+set_from_resource $grey        color16  #000000
+set_from_resource $brightgrey  color17 #000000
+set_from_resource $darkorange  color19  #000000
+set_from_resource $foreground  foreground #000000
+set_from_resource $background  background #000000
+set $darkblack   #1d2021
+
+# window colors
+# Colors                  border           background       text           indicator   child_border
+client.focused            $brightgrey      $brightgrey      $lightorange   $darkblack  $darkyellow
+client.focused_inactive   $brightgrey      $brightgrey      $lightorange   $darkblack  $black
+client.unfocused          $grey            $grey            $darkorange    $grey       $black
+client.urgent             $darkyellow      $darkyellow      $black         $darkred    $darkred
+client.background         $brightgrey
+
+# status bar settings
+bar {
+    colors {
+        # Whole color settings
+        background $grey
+        separator  $brightgrey
+        statusline $lightorange
+
+        # Type             border          background      font
+        focused_workspace  $brightgrey     $brightgrey     $lightorange
+        active_workspace   $grey           $grey           $darkorange
+        inactive_workspace $grey           $grey           $darkorange
+        urgent_workspace   $darkyellow     $darkyellow     $black
+	}
+
+	separator_symbol "  |  "
+    # tray_output none
+	position top
+	status_command py3status --dbus-notify
+}
+
+# sound for vol changes
+set $indicator /usr/share/sounds/gnome/defaults/alerts/drip.ogg
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec "amixer set Master -q 5%+ unmute && paplay $indicator"
+bindsym XF86AudioLowerVolume exec "amixer set Master -q 5%- unmute && paplay $indicator"
+bindsym XF86AudioMute exec "amixer -q -D pulse set Master toggle"
+
+# brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym Shift+XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym Shift+XF86MonBrightnessDown exec xbacklight -dec 5
+
+# screenshot
+bindsym --release Shift+Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+bindsym --release Print exec --no-startup-id "maim -s -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+
+bindsym $mod+n exec --no-startup-id thunar
+
+# Pause key for media control
+bindsym Pause exec playerctl play-pause
+
+# hotkeys to open apps with symboled keys
+bindcode 148 exec gnome-calculator
+bindcode 180 exec firefox
+
+# i3-gaps conf
+for_window [class=".*"] border pixel 2
+gaps inner 5
+gaps outer 5
+smart_gaps on
+smart_borders on
+
+# workspace assign for apps
+assign [class="firefox|firefoxdeveloperedition" window_role="browser"] $ws2
+assign [class="code-oss" window_role="browser-window"] $ws3
+assign [class="jetbrains-*-ce"] $ws4
+assign [class="Slack"] $ws7
+assign [class="Discord"] $ws8
+for_window [class="Gnome-pomodoro"] floating enable focus
+for_window [class="Gnome-calculator"] floating enable focus
+for_window [class="JetBrains Toolbox"] floating enable
+for_window [class="Pomodoro"] floating enable
+for_window [class="vlc"] floating enable
+for_window [class="jetbrains-.*" title="win0"] floating enable
+for_window [class="^jetbrains-.+"][window_type=dialog] focus 
+for_window [class="Yad"] floating enable
+
+# open jetbrains toolbox
+# set $toolbox ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
+# bindsym $mod+Shift+t exec $toolbox ---class "JetBrains Toolbox"
+
+# Startup Apps
+exec --no-startup-id redshift -l 51.20:6.80 -t 5600:3400 &
+exec --no-startup-id dunst &
+# exec --no-startup-id jetbrains-toolbox --minimize --class "JetBrains Toolbox"
+exec --no-startup-id picom
+exec --no-startup-id nextcloud &
+# exec --no-startup-id nm-applet &
+exec --no-startup-id udiskie -t &
+# exec --no-startup-id blueman-applet &
+# exec --no-startup-id imwheel -b 45
+#exec --no-startup-id fusuma &
+# exec --no-startup-id i3-gnome-pomodoro daemon &
+
+# set background img
+exec_always feh --bg-fill ~/Pictures/cheng-xiao-leaf.jpg
+
+# Lock screen
+set $Locker blurlock
+bindsym $mod+Shift+s exec --no-startup-id $Locker
+#exec --no-startup-id xautolock -time 20 -locker $Locker -detectsleep

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+AUDIO=/usr/share/gnome-pomodoro/sounds/bell.ogg
+notify-send Pomodoro "Time is up!" & paplay $AUDIO

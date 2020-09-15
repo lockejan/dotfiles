@@ -1,0 +1,398 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+# set font
+font pango:Overpass Display, FontAwesome5Free, FontAwesome5Brands 13
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Your preferred terminal emulator
+#set $term urxvt256c-ml
+#set $term tilix
+set $term alacritty
+
+# Your preferred application launcher
+# Note: it's recommended that you pass the final command to sway
+# set $menu dmenu_path | dmenu | xargs swaymsg exec --
+ set $alt_menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
+set $menu rofi -show combi | xargs swaymsg exec --
+set $pass rofi-pass | xargs swaymsg exec --
+
+
+
+# Gaps
+#
+for_window [title="^.*"] border pixel 2
+gaps inner 5
+smart_gaps on
+smart_borders on
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+#output * bg /usr/share/backgrounds/f31/default/normalish/f31.png fill
+output * bg ~/Pictures/photography-of-leaves.jpg fill
+
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#output HDMI-A-1 scale 1
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configuration
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
+
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+input "1133:16471:Logitech_B330/M330/M331" {
+    natural_scroll enabled
+    middle_emulation enabled
+}
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+# Workspaces:
+#
+    # aliases for workspaces
+    set $ws1 "1:  "
+    set $ws2 "2:  "
+    set $ws3 "3:  "
+    set $ws4 "4:  "
+    set $ws5 "5:  "
+    set $ws6 "6:  "
+    set $ws7 "7:  "
+    set $ws8 "8:  "
+    set $ws9 "9:  "
+
+bindsym --to-code {
+
+    # start a terminal
+    $mod+Return exec $term
+
+    # kill focused window
+    $mod+q kill
+
+    # start your launcher
+    $mod+d exec $menu
+    $mod+Alt+d exec $alt_menu
+    
+    $mod+Shift+d exec rofimoji 
+    
+    # rofi-pass
+    $mod+p exec rofi-pass 
+    
+    # screenshot
+    Print exec grim -g "$(slurp)"
+
+    # reload the configuration file
+    $mod+Shift+c reload
+
+    # Move your focus around
+    $mod+$left focus left
+    $mod+$down focus down
+    $mod+$up focus up
+    $mod+$right focus right
+    # or use $mod+[up|down|left|right]
+    $mod+Left focus left
+    $mod+Down focus down
+    $mod+Up focus up
+    $mod+Right focus right
+
+    # _move_ the focused window with the same, but add Shift
+    $mod+Shift+$left move left
+    $mod+Shift+$down move down
+    $mod+Shift+$up move up
+    $mod+Shift+$right move right
+    # ditto, with arrow keys
+    $mod+Shift+Left move left
+    $mod+Shift+Down move down
+    $mod+Shift+Up move up
+    $mod+Shift+Right move right
+
+    # switch to workspace
+    $mod+1 workspace $ws1
+    $mod+2 workspace $ws2
+    $mod+3 workspace $ws3
+    $mod+4 workspace $ws4
+    $mod+5 workspace $ws5
+    $mod+6 workspace $ws6
+    $mod+7 workspace $ws7
+    $mod+8 workspace $ws8
+    $mod+9 workspace $ws9
+    # $mod+0 $ws10
+
+    # move focused container to workspace
+    $mod+Shift+1 move container to workspace $ws1
+    $mod+Shift+2 move container to workspace $ws2
+    $mod+Shift+3 move container to workspace $ws3
+    $mod+Shift+4 move container to workspace $ws4
+    $mod+Shift+5 move container to workspace $ws5
+    $mod+Shift+6 move container to workspace $ws6
+    $mod+Shift+7 move container to workspace $ws7
+    $mod+Shift+8 move container to workspace $ws8
+    $mod+Shift+9 move container to workspace $ws9
+    # $mod+Shift+0 move container to $ws10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+    
+    # switch to workspace
+    $mod+KP_1 workspace $ws1
+    $mod+KP_2 workspace $ws2
+    $mod+KP_3 workspace $ws3
+    $mod+KP_4 workspace $ws4
+    $mod+KP_5 workspace $ws5
+    $mod+KP_6 workspace $ws6
+    $mod+KP_7 workspace $ws7
+    $mod+KP_8 workspace $ws8
+    $mod+KP_9 workspace $ws9
+    # $mod+KP_0 $ws10
+
+    # move focused container to workspace
+    $mod+Ctrl+KP_1 move container to workspace $ws1
+    $mod+Ctrl+KP_2 move container to workspace $ws2
+    $mod+Ctrl+KP_3 move container to workspace $ws3
+    $mod+Ctrl+KP_4 move container to workspace $ws4
+    $mod+Ctrl+KP_5 move container to workspace $ws5
+    $mod+Ctrl+KP_6 move container to workspace $ws6
+    $mod+Ctrl+KP_7 move container to workspace $ws7
+    $mod+Ctrl+KP_8 move container to workspace $ws8
+    $mod+Ctrl+KP_9 move container to workspace $ws9
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    $mod+b splith
+    $mod+v splitv
+
+    # Switch the current container between different layout styles
+    $mod+s layout stacking
+    $mod+w layout tabbed
+    $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    $mod+space focus mode_toggle
+
+    # move focus to the parent container
+    $mod+a focus parent
+    $mod+Shift+A focus child
+
+    #navigate workspaces next / previous
+    $mod+Ctrl+Right workspace next
+    $mod+Ctrl+l workspace next
+    $mod+Ctrl+Left workspace prev
+    $mod+Ctrl+h workspace prev
+
+}
+    # quick ws toggle
+    workspace_auto_back_and_forth yes
+
+    # move focus on activation
+    focus_on_window_activation focus
+
+
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym --to-code {
+	$left resize shrink width 10px
+	$down resize grow height 10px
+	$up resize shrink height 10px
+	$right resize grow width 10px
+
+	# ditto, with arrow keys
+	Left resize shrink width 10px
+	Down resize grow height 10px
+	Up resize shrink height 10px
+	Right resize grow width 10px
+
+	# return to default mode
+	Return mode "default"
+	Escape mode "default"
+    }
+}
+bindsym $mod+r mode "resize"
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+
+# Color scheme (Gruvbox dark)
+set $color_normal_white  #a89984
+set $color_bright_white  #ebdbb2
+set $color_normal_gray   #222222
+set $color_bright_gray   #3c3836
+set $color_bright_yellow #d79921
+set $color_normal_black  #282828
+set $color_unused        #ff0000
+
+# Colors                  border                 background             text                   indicator            child_border
+client.focused            $color_bright_gray     $color_bright_gray     $color_bright_white    $color_bright_gray   $color_bright_yellow
+client.focused_inactive   $color_bright_gray     $color_bright_gray     $color_bright_white    $color_bright_gray   $color_normal_black
+client.unfocused          $color_normal_gray     $color_normal_gray     $color_normal_white    $color_normal_gray   $color_normal_black
+client.urgent             $color_bright_yellow   $color_bright_yellow   $color_normal_black    $color_unused        $color_unused
+client.placeholder        $color_unused          $color_unused          $color_unused          $color_unused        $color_unused
+
+# Bar
+bar {
+    colors {
+        # Whole color settings
+        background $color_normal_gray
+        separator  $color_bright_gray
+        statusline $color_bright_white
+
+        # Type             border                 background              font
+        focused_workspace  $color_bright_gray     $color_bright_gray      $color_bright_white
+        active_workspace   $color_normal_gray     $color_normal_gray      $color_normal_white
+        inactive_workspace $color_normal_gray     $color_normal_gray      $color_normal_white
+        urgent_workspace   $color_bright_yellow   $color_bright_yellow    $color_normal_black
+    }
+
+    separator_symbol "  |  "
+    status_command py3status --dbus-notify 
+    position top
+    # tray_output none
+}
+
+set $mode_system "System (l)ock, (e)xit, (s)uspend, (r)eboot, (Shift+s) shutdown"
+mode $mode_system {
+    bindsym --to-code {
+        l exec $Locker, mode "default"
+        e exec swaymsg exit, mode "default"
+        s exec systemctl suspend, mode "default"
+        r exec systemctl reboot, mode "default"
+        Shift+s exec systemctl shutdown, mode "default"
+
+        # back to normal: Enter or Escape
+        Return mode "default"
+        Escape mode "default"
+    }
+}
+
+# Modes
+bindsym $mod+0 mode $mode_system
+bindsym $mod+KP_0 mode $mode_system
+
+bindsym $mod+F1 exec "yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30"
+bindsym $mod+F9 exec "~/bin/i3-gnome-pomodoro/pomodoro-client.py start"
+bindsym $mod+F10 exec "~/bin/i3-gnome-pomodoro/pomodoro-client.py toggle"
+bindsym $mod+F11 exec "~/bin/i3-gnome-pomodoro/pomodoro-client.py skip"
+bindsym $mod+F12 exec "~/bin/i3-gnome-pomodoro/pomodoro-client.py stop"
+
+# sound for vol changes
+set $indicator /usr/share/sounds/gnome/default/alerts/drip.ogg
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec "amixer set Master -q 5%+ unmute && paplay $indicator"
+bindsym XF86AudioLowerVolume exec "amixer set Master -q 5%- unmute && paplay $indicator"
+bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
+ 
+# Pause key for media control
+bindsym Pause exec playerctl play-pause
+
+input * {
+xkb_layout de,de
+xkb_variant ,nodeadkeys
+xkb_numlock enable
+xkb_options grp:alt_shift_toggle
+xkb_options caps:escape
+}
+
+# workspace assign for apps
+assign [class="Firefox"] $ws2
+assign [class="Code"] $ws3
+assign [class="TrueFire 3"] $ws7
+assign [class="Thunderbird"] $ws9
+assign [class="jetbrains-*-ce"] $ws4
+for_window [class="Spotify"] move to workspace $ws8 
+for_window [class="Gnome-pomodoro"] floating enable focus
+for_window [class="Gnome-calculator"] floating enable focus
+for_window [class="JetBrains Toolbox"] floating enable
+for_window [class="Signal"] floating enable
+for_window [class="Pomodoro"] floating enable
+for_window [class="Skype"] floating enable
+for_window [class="vlc"] floating enable
+for_window [class="jetbrains-.*" title="win0"] floating enable
+for_window [class="^jetbrains-.+"][window_type=dialog] focus 
+for_window [class="Yad"] floating enable
+
+# open jetbrains toolbox
+set $toolbox .local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
+bindsym $mod+Shift+t exec $toolbox ---class "JetBrains Toolbox
+
+exec xrdb ~/.Xresources
+exec nextcloud 
+exec redshift -l 51.20:6.80 -t 5600:3400
+# exec skypeforlinux
+exec $toolbox --minimize --class "JetBrains Toolbox"
+exec spotify
+exec mako
+# exec "~/bin/i3-gnome-pomodoro/pomodoro-client.py daemon &"
+
+# Lock screen
+set $Locker swaylock
+bindsym $mod+Shift+s exec $Locker
+
+exec setxkbmap -layout de
+# exec ssh-agent.sh

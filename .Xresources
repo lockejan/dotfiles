@@ -1,0 +1,85 @@
+Xft.dpi: 96
+
+! These might also be useful depending on your monitor and personal preference:
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+
+! -----------------------------------------------------------------------------
+! File: gruvbox-dark.xresources
+! Description: Retro groove colorscheme generalized
+! Author: morhetz <morhetz@gmail.com>
+! Source: https://github.com/morhetz/gruvbox-generalized
+! Last Modified: 6 Sep 2014
+! -----------------------------------------------------------------------------
+
+! hard contrast: *background: #1d2021
+*background: #282828
+! soft contrast: *background: #32302f
+*foreground: #ebdbb2
+! Black + DarkGrey
+*color0:  #282828
+*color8:  #928374
+! DarkRed + Red
+*color1:  #cc241d
+*color9:  #fb4934
+! DarkGreen + Green
+*color2:  #98971a
+*color10: #b8bb26
+! DarkYellow + Yellow
+*color3:  #d79921
+*color11: #fabd2f
+! DarkBlue + Blue
+*color4:  #458588
+*color12: #83a598
+! DarkMagenta + Magenta
+*color5:  #b16286
+*color13: #d3869b
+! DarkCyan + Cyan
+*color6:  #689d6a
+*color14: #8ec07c
+! LightGrey + LightOrange
+*color7:  #a89984
+*color15: #ebdbb2
+! Grey + BrightGrey
+*color16: #222222
+*color17: #3c3836
+! Red + DarkOrange
+*color18: #ff0000
+*color19: #a89984
+
+URxvt.font: xft:monospace:pixelsize=14,xft:JoyPixels:pixelsize=10,xft:FontAwesome5Free:size=13,xft.FontAwesome5Brands:size=13
+
+URxvt*depth: 32
+URxvt*background: rgba:0000/0000/0200/c800
+/* URxvt*background: [90]#000000 */
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt*scrollBar: false
+!clickable urls
+URxvt.perl-ext-common: default,matcher
+
+URxvt.perl-ext: default,url-select,resize-font
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+
+/* URxvt.url-launcher: /usr/bin/xdg-open */
+URxvt.matcher.button: 1
+
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+! reduce font-spacing
+URxvt.letterSpace: -1

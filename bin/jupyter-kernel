@@ -1,0 +1,52 @@
+#!/bin/sh 
+
+# https://www.alfredo.motta.name/create-isolated-jupyter-ipython-kernels-with-pyenv-and-virtualenv/
+# install pyenv pyenv-virtualenv
+
+# properly setup, for e.g. install at least miniconda3-lastest
+
+# pyenv versions
+
+# pip install ipykernel
+
+# jupyter --paths
+
+# # runtime: DIR
+# # create folder in kernels with env name
+# # create file kernel.json
+
+# put in kernel.json following content
+ 
+# {
+#  "argv": [ "$HOME/.pyenv/versions/{env-name}/bin/python", "-m", "ipykernel",
+#           "-f", "{connection_file}"],
+#  "display_name": "{env-name}",
+#  "language": "python"
+# }V
+
+#!/bin/sh
+
+if [ "$PYENV_VERSION" -ne "" ]
+then
+    name=`pyenv version-name`
+    python=`pyenv which python`
+else
+    name=`basename "$VIRTUAL_ENV"`
+    python="$VIRTUALENV/bin/python"
+fi
+jupyterdir=$(jupyter --data-dir)
+kerneldir="${jupyterdir}/kernels/${name}"
+
+echo "Installing jupyter kernel file $name for $python to $kerneldir ..."
+
+pip install ipykernel
+mkdir -p "$kerneldir"
+cat > "$kerneldir"/kernel.json <<EOF
+{
+    "argv": [ "$python", "-m", "ipykernel", "-f", "{connection_file}" ],
+    "display_name": "$name", 
+    "language": "python"
+}
+EOF
+
+cat "$kerneldir"/kernel.json
