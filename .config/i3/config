@@ -80,6 +80,7 @@ workspace_auto_back_and_forth yes
 
 # move focus on activation
 focus_on_window_activation focus
+focus_follows_mouse no
 
 # set workspace title decoration
 set $ws1 "1:  "
@@ -332,17 +333,12 @@ for_window [class="jetbrains-.*" title="win0"] floating enable
 for_window [class="^jetbrains-.+"][window_type=dialog] focus 
 for_window [class="Yad"] floating enable
 
-# open jetbrains toolbox
-# set $toolbox ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
-# bindsym $mod+Shift+t exec $toolbox ---class "JetBrains Toolbox"
-
 # Startup Apps
 exec --no-startup-id redshift -l 51.20:6.80 -t 5600:3400 &
 exec --no-startup-id dunst &
-# exec --no-startup-id jetbrains-toolbox --minimize --class "JetBrains Toolbox"
 exec --no-startup-id picom
 exec --no-startup-id nextcloud &
-# exec --no-startup-id nm-applet &
+exec --no-startup-id nm-applet &
 exec --no-startup-id udiskie -t &
 # exec --no-startup-id blueman-applet &
 # exec --no-startup-id imwheel -b 45
