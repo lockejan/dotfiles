@@ -3,6 +3,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Tools
     Plug 'airblade/vim-gitgutter'
     Plug 'airblade/vim-rooter'
+    Plug 'bling/vim-bufferline'
     " Plug 'honza/vim-snippets'
     Plug 'junegunn/fzf.vim',
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -49,10 +50,12 @@ nmap ( <Plug>(GitGutterPrevHunk)
 " Color settings
 colorscheme gruvbox
 set background=dark
+hi! Normal ctermbg=NONE guibg=NONE
 
 " Statusline config
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 " Get rid of trailing Whitespaces
 function TrimWhitespace()
