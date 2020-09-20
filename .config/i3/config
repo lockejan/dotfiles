@@ -197,7 +197,6 @@ bindsym $mod+u [instance="dropdown"] scratchpad show
 # rofi config
 bindsym $mod+p exec --no-startup-id rofi-pass
 bindsym $mod+d exec --no-startup-id rofi -show combi
-
 # emoji keyboard and calendar
 bindsym $mod+Shift+d exec --no-startup-id rofimoji
 bindsym $mod+udiaeresis exec "yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30"
@@ -320,7 +319,6 @@ exec --no-startup-id udiskie -t &
 # exec --no-startup-id blueman-applet &
 # exec --no-startup-id imwheel -b 45
 # exec --no-startup-id fusuma &
-# exec --no-startup-id i3-gnome-pomodoro daemon &
 
 # set background img
 exec_always feh --bg-fill ~/Pictures/cheng-xiao-leaf.jpg

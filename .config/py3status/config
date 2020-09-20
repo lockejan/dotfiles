@@ -77,7 +77,7 @@ hueshift {
     }
 
 wifi {
-   format = '{ssid} {signal_dbm} dBm' 
+   format = '{signal_dbm} dBm' 
     }
 
 battery all {
