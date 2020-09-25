@@ -5,9 +5,11 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'airblade/vim-rooter'
     Plug 'bling/vim-bufferline'
     " Plug 'honza/vim-snippets'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
     Plug 'junegunn/fzf.vim',
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/gv.vim'
+    Plug 'lambdalisue/suda.vim'
     Plug 'rbgrouleff/bclose.vim'
     " Plug 'sbdchd/neoformat'
     Plug 'tpope/vim-fugitive'
@@ -30,6 +32,7 @@ source $HOME/.config/nvim/plugin-settings/custom-keybindings.vim
 source $HOME/.config/nvim/plugin-settings/better-defaults.vim
 source $HOME/.config/nvim/plugin-settings/fzf.vim
 source $HOME/.config/nvim/plugin-settings/coc.vim
+source $HOME/.config/nvim/plugin-settings/markdow-preview.vim
 
 " Neoformat
 " augroup fmt

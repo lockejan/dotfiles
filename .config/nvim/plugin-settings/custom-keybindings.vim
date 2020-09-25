@@ -10,6 +10,9 @@ nmap <leader><leader> :bnext<CR>
 nmap <leader>. :bprevious<CR>
 nmap <leader>l :ls<CR>
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! SudaWrite
+
 " split movemment
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
