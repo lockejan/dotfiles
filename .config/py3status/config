@@ -1,15 +1,12 @@
 general {
-        colors = true
-        interval = 1
+    colors = true
+    interval = 1
 }
 
-order += "external_script 0"
-#order += "external_script 1"
-order += "wifi"
 #order += "pomodoro"
+order += "external_script 0"
+order += "wifi"
 order += "memory"
-#order += "arch_updates"
-#order += "hueshift"
 order += "backlight"
 order += "volume master"
 order += "battery all"
@@ -18,12 +15,7 @@ order += "tztime local"
 external_script 0{
     format = "{output}"
     script_path = "thesis-timer"
-	cache_timeout = 60
-}
-
-external_script 1{
-	script_path = "i3-gnome-pomodoro status"
-	cache_timeout = 1
+    cache_timeout = 60
 }
 
 pomodoro {
@@ -32,59 +24,58 @@ pomodoro {
     sound_pomodoro_end = "/usr/share/gnome-pomodoro/sounds/loud-bell.ogg"
     sound_pomodoro_start = "/usr/share/gnome-pomodoro/sounds/bell.ogg"
     sound_break_end = "/usr/share/gnome-pomodoro/sounds/loud-bell.ogg"
-    }
+}
 
 backlight {
     cache_timeout = 3
-    }
+}
 
 disk "/" {
-        format = " %avail"
+    format = " %avail"
 }
 
 cpu_usage {
-        format = " %usage"
+    format = " %usage"
 }
 
 memory {
-        format = " %used"
-        threshold_degraded = "1G"
-        format_degraded = "MEMORY < %available"
+    format = " %used"
+    threshold_degraded = "1G"
+    format_degraded = "MEMORY < %available"
 }
 
 volume master {
-        format = " %volume"
-        format_muted = " (%volume)"
-        device = "default"
-        mixer = "Master"
-        mixer_idx = 0
+    format = " %volume"
+    format_muted = " (%volume)"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
 }
 
 tztime local {
-        format = " %a,%d.%m.  %H:%M"
+    format = " %a,%d.%m.  %H:%M"
 }
 
 arch_updates{
-	format = " : {total}"
-	color_good = "#77DD77"
-	color_bad = "#FDFD96"
-	color_degraded = "#FF6961"
+    format = " : {total}"
+    color_good = "#77DD77"
+    color_bad = "#FDFD96"
+    color_degraded = "#FF6961"
 }
 
 hueshift {
-        format = '\?color=color_temperature  {color_temperature}K'
-        command = 'redshift'
-    }
+    format = '\?color=color_temperature  {color_temperature}K'
+    command = 'redshift'
+}
 
 wifi {
-   format = '{signal_dbm} dBm' 
-    }
+    format = '{signal_dbm} dBm'
+}
 
 battery all {
-#     format = "%status %percentage %remaining"
-     format = "%status %percentage"
-	 status_full = ""
-	 status_bat = ""
-	 status_unk = ""
-	 status_chr = ""
+    format = "%status %percentage %remaining"
+    status_full = ""
+    status_bat = ""
+    status_unk = ""
+    status_chr = ""
 }
