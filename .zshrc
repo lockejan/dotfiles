@@ -79,3 +79,4 @@ sipgateresolvconf ()
 
 source ~/io.env
 # paleofetch
+git-team disable > /dev/null
