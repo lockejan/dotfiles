@@ -1,7 +1,4 @@
 " ########## CUSTOM ADDITIONS
-" nnoremap <leader> F :call CocAction('format')<CR>
-nmap <leader>qf  <Plug>(coc-fix-current)
-
 " make sure the ext get installed automatically
 let g:coc_global_extensions = [
     \ 'coc-tsserver',
@@ -10,7 +7,9 @@ let g:coc_global_extensions = [
     \ 'coc-snippets',
     \ 'coc-python',
     \ 'coc-json',
-    \ 'coc-java'
+    \ 'coc-java',
+    \ 'coc-markdownlint',
+    \ 'coc-yaml'
     \ ]
 
 " ########## DEFAULTS
