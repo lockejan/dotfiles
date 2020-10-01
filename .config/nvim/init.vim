@@ -10,11 +10,14 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/gv.vim'
     Plug 'lambdalisue/suda.vim'
+    Plug 'mihaifm/bufstop'
     Plug 'rbgrouleff/bclose.vim'
     " Plug 'sbdchd/neoformat'
+    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
+    Plug 'unkiwii/vim-nerdtree-sync'
     Plug 'vifm/vifm.vim'
     Plug 'vim-airline/vim-airline'
     " Plug 'wellle/targets.vim'
@@ -73,3 +76,36 @@ if !exists(":DiffOrig")
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
     \ | wincmd p | diffthis
 endif
+
+" NERDTREE settings
+nmap <C-n> :NERDTreeToggle<CR>
+nmap ,m :NERDTreeToggle<CR>
+nmap ,n :NERDTreeFind<CR>
+
+let g:plug_window = 'noautocmd vertical topleft new'
+let NERDTreeShowHidden=1
+
+" If more than one window and previous buffer was NERDTree, go back to it.
+autocmd BufRead * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+" autocmd BufRead * call SyncTree()
+autocmd BufRead * call SyncTree()
+
+augroup nerdtree_open
+    autocmd!
+    autocmd VimEnter * NERDTree | wincmd p
+augroup END

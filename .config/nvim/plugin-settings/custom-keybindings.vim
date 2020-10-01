@@ -6,9 +6,10 @@ map <C-g>:GitGutterDisable <BAR> :set laststatus=0 <CR>
 " map <leader>l :set background=light<CR>
 " map <leader>b :set background=dark<CR>
 map <C-S>:so %<CR>
-nmap <leader><leader> :bnext<CR>
-nmap <leader>. :bprevious<CR>
+nmap <leader><leader> :bprevious<CR>
+nmap <leader>n :bnext<CR>
 nmap <leader>l :ls<CR>
+nmap <leader>. :BufstopFast<CR>
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! SudaWrite
