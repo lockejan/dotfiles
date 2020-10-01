@@ -45,6 +45,7 @@ plugins=(
   tmux
   z
   zsh-autosuggestions
+  zsh-abbr
   zsh-syntax-highlighting
 )
 

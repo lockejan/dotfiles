@@ -1,0 +1,4 @@
+abbr -g la="exa -la"
+abbr -g lh="exa -lh"
+abbr -g ll="exa -l"
+abbr -g ls="exa"
