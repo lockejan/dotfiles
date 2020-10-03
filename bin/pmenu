@@ -24,9 +24,10 @@ IFS=$'\n' s_i_db=($sinks_index)
 s_i_count=${#s_i_db[@]}
 
 
-ret_prog=$(printf '%s' "$programs_name" | dmenu -l $p_n_size)
+# ret_prog=$(printf '%s' "$programs_name" | dmenu -l $p_n_size)
+# ret_prog=$(printf '%s' "$programs_name" | rofi -dmenu -p $p_n_size)
 
-ret_sink=$(printf '%s' "$sinks_name" | dmenu -l $s_n_size)
+ret_sink=$(printf '%s' "$sinks_name" | rofi -dmenu -p $s_n_size)
 
 # Get indexes of ret_prog and ret_sink in *_name_db
 for (( i = 0; i < ${#p_n_db[@]}; i++ )); do

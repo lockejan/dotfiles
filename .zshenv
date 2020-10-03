@@ -20,6 +20,8 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # Tell Node about these packages
 # NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 
+export SUDO_ASKPASS=~/bin/askpass-rofi
+
 # GO DIR
 # export PATH="$PATH:$HOME/go/bin"
 export GOPATH="$HOME/go"
