@@ -10,7 +10,7 @@ nmap <leader><leader> :bprevious<CR>
 nmap <leader>n :bnext<CR>
 nmap <leader>l :ls<CR>
 nmap <leader>. :BufstopFast<CR>
-
+nnoremap <leader>cd :cd %:p:h<CR>
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! SudaWrite
 

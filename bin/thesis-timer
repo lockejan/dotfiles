@@ -57,7 +57,7 @@ def get_workdays_for_thesis():
 
 def get_days_till_due_date():
     effective, remaining = get_workdays_for_thesis()
-    return print(f" {effective}/{remaining} days")
+    return print(f"  {remaining} days")
 
 
 if __name__ == "__main__":

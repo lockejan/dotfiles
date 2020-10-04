@@ -1,17 +1,10 @@
 # invoke ssh-add if key not present
-ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/id_rsa  | awk '{print $2}'` || ssh-add ~/.ssh/id_rsa
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/id_rsa  | awk '{print $2}'` || sudo -A ssh-add ~/.ssh/id_rsa
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
 
 DEFAULT_USER=schmitt
 
@@ -52,24 +45,9 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-alias bt=bashtop
+alias vifm='~/.config/vifm/scripts/vifmrun'
 alias vim=nvim
 alias vi=nvim
-alias zc="$EDITOR ~/.zshrc"
-alias vc="$EDITOR ~/.config/nvim/init.vim"
-alias i3c="$EDITOR ~/.config/i3/config"
-alias swayc="$EDITOR ~/.config/sway/config"
-alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
-alias sipvpn="sudo openvpn --config ~/telearbeit"
-alias update="yay && omz update"
-alias reload="source ~/.zshrc"
-alias vifm='~/.config/vifm/scripts/vifmrun'
-alias vf='vim $(fzf)'
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 sipgateresolvconf ()
 {
@@ -79,5 +57,4 @@ sipgateresolvconf ()
 }
 
 source ~/io.env
-# paleofetch
 git-team disable > /dev/null
