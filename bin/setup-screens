@@ -2,7 +2,13 @@
 set -euo pipefail
 
 # Search all autorandr profiles and pipe it to rofi for selection
-profile=$(find ~/.config/autorandr/* -maxdepth 1 -type d -printf '%f\n' | rofi -dmenu -p autorandr)
+LIST=$(find ~/.config/autorandr/* -maxdepth 1 -type d -printf '%f\n')
+CURRENT=$(autorandr --current)
+
+CURRENT_INDEX=$(echo  "$(echo "$LIST" | awk -F "[  ]{2,}" '{print $1}' | grep -Fxn -m 1 "$CURRENT" | awk -F ":" '{print $1}') - 1" | bc )
+LINENUM=$(echo "$LIST" | wc -l)
+
+profile=$(echo "$LIST" | rofi -dmenu -p "Load screen profile" -lines "$LINENUM" -a "$CURRENT_INDEX")
 
 if [[ $profile ]]; then
     autorandr --load $profile

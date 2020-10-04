@@ -1,5 +1,5 @@
 # invoke ssh-add if key not present
-ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/id_rsa  | awk '{print $2}'` || sudo -A ssh-add ~/.ssh/id_rsa
+ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/id_rsa  | awk '{print $2}'` ||  ssh-add ~/.ssh/id_rsa
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"

@@ -7,9 +7,9 @@ LIST=$(find /usr/lib/jvm/* -maxdepth 0 -type d -printf '%f\n')
 CURRENT=$(archlinux-java get)
 CURRENT_INDEX=$(echo  "$(echo "$LIST" | awk -F "[  ]{2,}" '{print $1}' | grep -Fxn -m 1 "$CURRENT" | awk -F ":" '{print $1}') - 1" | bc )
 
-LINENUM=4
+LINENUM=$(echo "$LIST" | wc -l)
 
-profile=$(find /usr/lib/jvm/* -maxdepth 0 -type d -printf '%f\n' | rofi -dmenu -p "Activate Java Version" -lines "$LINENUM" -a "$CURRENT_INDEX")
+profile=$(echo "$LIST" | rofi -dmenu -p "Switch to Java" -lines "$LINENUM" -a "$CURRENT_INDEX")
 
 if [[ $profile ]]; then
     sudo -A archlinux-java set $profile

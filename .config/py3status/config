@@ -30,14 +30,6 @@ backlight {
     cache_timeout = 3
 }
 
-disk "/" {
-    format = " %avail"
-}
-
-cpu_usage {
-    format = " %usage"
-}
-
 memory {
     format = " %used"
     threshold_degraded = "1G"
@@ -61,11 +53,6 @@ arch_updates{
     color_good = "#77DD77"
     color_bad = "#FDFD96"
     color_degraded = "#FF6961"
-}
-
-hueshift {
-    format = '\?color=color_temperature  {color_temperature}K'
-    command = 'redshift'
 }
 
 wifi {
