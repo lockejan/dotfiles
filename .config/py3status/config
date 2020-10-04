@@ -5,7 +5,7 @@ general {
 
 #order += "pomodoro"
 order += "external_script 0"
-order += "wifi"
+#order += "wifi"
 order += "memory"
 order += "backlight"
 order += "volume master"
@@ -73,7 +73,7 @@ wifi {
 }
 
 battery all {
-    format = "%status %percentage %remaining"
+    format = "%status %percentage"
     status_full = ""
     status_bat = ""
     status_unk = ""

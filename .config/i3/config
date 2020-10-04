@@ -90,7 +90,7 @@ set $ws4 "4:  "
 set $ws5 "5:  "
 set $ws6 "6:  "
 set $ws7 "7:  "
-set $ws8 "8:  "
+set $ws8 "8:  "
 set $ws9 "9:  "
 
 # switch to workspace
@@ -252,12 +252,11 @@ bar {
         active_workspace   $grey           $grey           $darkorange
         inactive_workspace $grey           $grey           $darkorange
         urgent_workspace   $darkyellow     $darkyellow     $black
-	}
+        }
 
-	separator_symbol "  |  "
-    # tray_output none
-	position top
-	status_command py3status --dbus-notify
+    separator_symbol "  |  "
+    position top
+    status_command py3status --dbus-notify
 }
 
 # sound for vol changes
@@ -306,7 +305,7 @@ for_window [class="JetBrains Toolbox"] floating enable
 for_window [class="Pomodoro"] floating enable
 for_window [class="vlc"] floating enable
 for_window [class="jetbrains-.*" title="win0"] floating enable
-for_window [class="^jetbrains-.+"][window_type=dialog] focus 
+for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [class="Yad"] floating enable
 
 # Startup Apps
@@ -316,7 +315,7 @@ exec --no-startup-id picom
 exec --no-startup-id nextcloud &
 exec --no-startup-id nm-applet &
 exec --no-startup-id udiskie -t &
-# exec --no-startup-id blueman-applet &
+exec --no-startup-id blueman-applet &
 # exec --no-startup-id imwheel -b 45
 # exec --no-startup-id fusuma &
 
