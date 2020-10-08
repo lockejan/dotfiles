@@ -4,7 +4,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'airblade/vim-gitgutter'
     Plug 'airblade/vim-rooter'
     Plug 'bling/vim-bufferline'
-    " Plug 'honza/vim-snippets'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
     Plug 'junegunn/fzf.vim',
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -37,10 +36,13 @@ source $HOME/.config/nvim/plugin-settings/fzf.vim
 source $HOME/.config/nvim/plugin-settings/coc.vim
 source $HOME/.config/nvim/plugin-settings/markdow-preview.vim
 
+autocmd! bufwritepost $VIMRC source $VIMRC
+
 " Neoformat
+let g:neoformat_enabled_python = ['autopep8']
 " augroup fmt
 "   autocmd!
-"   autocmd BufWritePre * undojoin | Neoformat
+"   autocmd BufWritePre *.{py,ts,js} Neoformat
 " augroup END
 
 let g:ormolu_ghc_opt=["TypeApplications", "RankNTypes"]

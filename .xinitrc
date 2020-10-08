@@ -3,8 +3,6 @@
 [[ -f ~/.xprofile ]] && . ~/.xprofile
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-setxkbmap de
-setxkbmap -option caps:escape
 numlockx &
 
 xset s off

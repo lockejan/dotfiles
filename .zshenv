@@ -1,5 +1,6 @@
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
+export VIMRC="$HOME/.config/nvim/init.vim"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -20,12 +21,13 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # Tell Node about these packages
 # NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 
-export SUDO_ASKPASS=~/bin/askpass-rofi
+export SUDO_ASKPASS="$HOME/bin/askpass-rofi"
+export JAVA_HOME=/usr/lib/jvm/default
 
 # GO DIR
 # export PATH="$PATH:$HOME/go/bin"
 export GOPATH="$HOME/go"
 
 # deno bin path
-export DENO_INSTALL="/home/smittie/.deno"
+export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
