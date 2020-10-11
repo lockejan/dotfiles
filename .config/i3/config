@@ -189,16 +189,20 @@ bindsym $mod+minus scratchpad show
 
 # init dropdown windows
 for_window [instance="dropdown"] floating enable
-# for_window [instance="dropdown"] resize set 1440 900
 for_window [instance="dropdown"] move scratchpad
 exec --no-startup-id $term --class dropdown -e tmux
 bindsym $mod+u [instance="dropdown"] scratchpad show
 
+# for_window [instance="pomodoro"] floating enable
+# for_window [instance="pomodoro"] move scratchpad
+# exec --no-startup-id gnome-pomodoro --class pomodoro
+# bindsym $mod+i [instance="pomodoro"] scratchpad show
+
 # rofi config
-bindsym $mod+p exec --no-startup-id rofi-pass
-bindsym $mod+d exec --no-startup-id rofi -show combi
+bindsym $mod+p exec rofi-pass
+bindsym $mod+d exec rofi -show combi
 # emoji keyboard and calendar
-bindsym $mod+Shift+d exec --no-startup-id rofimoji
+bindsym $mod+Shift+d exec rofimoji
 bindsym $mod+udiaeresis exec "yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30"
 
 # Pomodoro
@@ -255,7 +259,7 @@ bar {
         }
 
     separator_symbol " | "
-    tray_output none
+    # tray_output none
     position top
     status_command py3status --dbus-notify
 }
@@ -264,15 +268,16 @@ bar {
 set $indicator /usr/share/sounds/gnome/defaults/alerts/drip.ogg
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec "amixer set Master -q 5%+ unmute && paplay $indicator"
-bindsym XF86AudioLowerVolume exec "amixer set Master -q 5%- unmute && paplay $indicator"
-bindsym XF86AudioMute exec "amixer -q -D pulse set Master toggle"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer set Master -q 5%+ unmute && paplay $indicator"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer set Master -q 5%- unmute && paplay $indicator"
+bindsym XF86AudioMute exec --no-startup-id "amixer -q -D pulse set Master toggle"
 
 # brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym Shift+XF86MonBrightnessUp exec xbacklight -inc 5
-bindsym Shift+XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym $mod+Shift+0 exec --no-startup-id xbacklight -set 0
 
 # screenshot
 bindsym --release Shift+Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
@@ -281,7 +286,7 @@ bindsym --release Print exec --no-startup-id "maim -s -p 0 -c 0.96,0.5,0.09 $HOM
 bindsym $mod+n exec --no-startup-id thunar
 
 # Pause key for media control
-bindsym Pause exec playerctl play-pause
+bindsym Pause exec --no-startup-id playerctl play-pause
 
 # hotkeys to open apps with symboled keys
 bindcode 148 exec gnome-calculator
@@ -289,9 +294,9 @@ bindcode 180 exec firefox
 
 # i3-gaps conf
 for_window [class=".*"] border pixel 2
-gaps inner 5
-gaps outer 5
-smart_gaps on
+gaps inner 7
+gaps outer 7
+# smart_gaps on
 smart_borders on
 
 # workspace assign for apps
@@ -301,27 +306,29 @@ assign [class="jetbrains-*-ce"] $ws4
 assign [class="Slack"] $ws7
 assign [class="Discord"] $ws8
 for_window [class="Gnome-pomodoro"] floating enable focus
+for_window [class="Pomodoro"] floating enable
 for_window [class="Gnome-calculator"] floating enable focus
 for_window [class="JetBrains Toolbox"] floating enable
-for_window [class="Pomodoro"] floating enable
 for_window [class="vlc"] floating enable
 for_window [class="jetbrains-.*" title="win0"] floating enable
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [class="Yad"] floating enable
 
 # Startup Apps
-exec --no-startup-id redshift -l 51.20:6.80 -t 5600:3400 &
+exec --no-startup-id redshift &
 exec --no-startup-id dunst &
 exec --no-startup-id picom
-# exec --no-startup-id nextcloud &
-# exec --no-startup-id nm-applet &
-exec --no-startup-id udiskie -t &
-# exec --no-startup-id blueman-applet &
+exec --no-startup-id autorandr --change
+exec --no-startup-id nextcloud &
+exec --no-startup-id nm-applet &
+exec --no-startup-id blueman-applet &
 # exec --no-startup-id imwheel -b 45
 # exec --no-startup-id fusuma &
+exec --no-startup-id nitrogen --restore
+# --set-auto ~/Pictures/Wallpaper/robert-bye-unsplash.jpg
 
 # set background img
-exec_always feh --bg-fill ~/Pictures/cheng-xiao-leaf.jpg
+# exec_always --no-startup-id feh --bg-fill ~/Pictures/cheng-xiao-leaf.jpg
 
 # Lock screen
 set $Locker blurlock
