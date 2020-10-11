@@ -1,0 +1,17 @@
+Config
+{ bgColor =      "white"
+, fgColor =      "black"
+, border =       BottomB
+, borderColor = "black"
+, commands = -- what information to show
+  -- network activity monitor (dynamic interface resolution)
+  [ Run DynNetwork [] 10 -- network traffic
+  , Run Memory ["-t" ,"RAM: <usedratio>%"] 10 -- RAM usage
+  , Run Battery [] 10 -- battery time
+  , Run Volume "default" "Master" [] 10
+  , Run Date "%d %b %T" "mydate" 10
+  , Run StdinReader -- text coming from xmonad
+  ]
+-- where to show command information
+, template = "%StdinReader% }{ %memory% | %default:Master% | %dynnetwork% | %battery% | %mydate% |"
+}
