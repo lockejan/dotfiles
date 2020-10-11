@@ -85,4 +85,5 @@ sipgateresolvconf ()
 }
 
 source ~/.io.env
+zle_bracketed_paste=()
 git-team disable > /dev/null
