@@ -3,7 +3,7 @@ general {
     interval = 1
 }
 
-#order += "pomodoro"
+order += "external_script 1"
 order += "external_script 0"
 #order += "wifi"
 order += "memory"
@@ -18,13 +18,11 @@ external_script 0{
     cache_timeout = 60
 }
 
-pomodoro {
-    #display_bar = True
-    format = "{mmss}"
-    sound_pomodoro_end = "/usr/share/gnome-pomodoro/sounds/loud-bell.ogg"
-    sound_pomodoro_start = "/usr/share/gnome-pomodoro/sounds/bell.ogg"
-    sound_break_end = "/usr/share/gnome-pomodoro/sounds/loud-bell.ogg"
-}
+external_script 1{
+    format = "{output}"
+    script_path = "i3-gnome-pomodoro status"
+    cache_timeout = 1
+    }
 
 backlight {
     cache_timeout = 3
