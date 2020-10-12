@@ -206,10 +206,10 @@ bindsym $mod+Shift+d exec rofimoji
 bindsym $mod+udiaeresis exec "yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30"
 
 # Pomodoro
-bindsym $mod+F9 exec i3-gnome-pomodoro start
-bindsym $mod+F10 exec i3-gnome-pomodoro toggle
-bindsym $mod+F11 exec i3-gnome-pomodoro skip
-bindsym $mod+F12 exec i3-gnome-pomodoro stop
+bindsym $mod+F9 exec --no-startup-id i3-gnome-pomodoro start
+bindsym $mod+F10 exec --no-startup-id i3-gnome-pomodoro toggle
+bindsym $mod+F11 exec --no-startup-id i3-gnome-pomodoro skip
+bindsym $mod+F12 exec --no-startup-id i3-gnome-pomodoro stop
 
 # Colors
 set_from_resource $black       color0  #000000
@@ -283,7 +283,7 @@ bindsym $mod+Shift+0 exec --no-startup-id xbacklight -set 0
 bindsym --release Shift+Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
 bindsym --release Print exec --no-startup-id "maim -s -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
 
-bindsym $mod+n exec --no-startup-id thunar
+bindsym $mod+n exec thunar
 
 # Pause key for media control
 bindsym Pause exec --no-startup-id playerctl play-pause
@@ -302,13 +302,12 @@ smart_borders on
 # workspace assign for apps
 assign [class="firefox|firefoxdeveloperedition" window_role="browser"] $ws2
 assign [class="code-oss" window_role="browser-window"] $ws3
-assign [class="jetbrains-*-ce"] $ws4
-assign [class="Slack"] $ws7
-assign [class="Discord"] $ws8
+assign [class="jetbrains-.*"] $ws4
+assign [class="discord"] $ws7
+assign [class="deezer-nativefier-*"] $ws8
 for_window [class="Gnome-pomodoro"] floating enable focus
 for_window [class="Pomodoro"] floating enable
 for_window [class="Gnome-calculator"] floating enable focus
-for_window [class="JetBrains Toolbox"] floating enable
 for_window [class="vlc"] floating enable
 for_window [class="jetbrains-.*" title="win0"] floating enable
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
@@ -320,15 +319,11 @@ exec --no-startup-id dunst &
 exec --no-startup-id picom
 exec --no-startup-id autorandr --change
 exec --no-startup-id nextcloud &
-exec --no-startup-id nm-applet &
-exec --no-startup-id blueman-applet &
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id fusuma &
+exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/8K_7680x4320.jpg
 # exec --no-startup-id imwheel -b 45
-# exec --no-startup-id fusuma &
-exec --no-startup-id nitrogen --restore
-# --set-auto ~/Pictures/Wallpaper/robert-bye-unsplash.jpg
-
-# set background img
-# exec_always --no-startup-id feh --bg-fill ~/Pictures/cheng-xiao-leaf.jpg
 
 # Lock screen
 set $Locker blurlock
