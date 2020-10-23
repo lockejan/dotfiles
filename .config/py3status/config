@@ -1,6 +1,14 @@
 general {
-    colors = true
-    interval = 1
+    color_good      = '#A3BE8C'
+    color_degraded  = '#EBCB8B'
+    color_bad       = '#D08770'
+	colors = true
+	interval = 1
+	markup = "pango"
+	output_format = "i3bar"
+}
+
+py3status {
 }
 
 order += "external_script 1"

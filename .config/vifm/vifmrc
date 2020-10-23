@@ -263,4 +263,4 @@ nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
 
 windo normal! zo
-colorscheme gruvbox
+colorscheme nord

@@ -212,54 +212,62 @@ bindsym $mod+F11 exec --no-startup-id i3-gnome-pomodoro skip
 bindsym $mod+F12 exec --no-startup-id i3-gnome-pomodoro stop
 
 # Colors
-set_from_resource $black       color0  #000000
-set_from_resource $darkgrey    color8  #000000
-set_from_resource $darkred     color1  #000000
-set_from_resource $red         color9  #000000
-set_from_resource $darkgreen   color2  #000000
-set_from_resource $green       color10 #000000
-set_from_resource $darkyellow  color3  #000000
-set_from_resource $yellow      color11 #000000
-set_from_resource $darkblue    color4  #000000
-set_from_resource $blue        color12 #000000
-set_from_resource $darkmagenta color5  #000000
-set_from_resource $magenta     color13 #000000
-set_from_resource $darkcyan    color6  #000000
-set_from_resource $cyan        color14 #000000
-set_from_resource $lightgrey   color7  #000000
-set_from_resource $lightorange color15 #000000
-set_from_resource $grey        color16  #000000
-set_from_resource $brightgrey  color17 #000000
-set_from_resource $darkorange  color19  #000000
-set_from_resource $foreground  foreground #000000
-set_from_resource $background  background #000000
-set $darkblack   #1d2021
+set_from_resource $nord1 color0 #000000
+set_from_resource $nord3 color8 #000000
+set_from_resource $nord5 color7 #000000
+set_from_resource $nord6 color15 #000000
+set_from_resource $nord7 color14 #000000
+set_from_resource $nord8 color6 #000000
+set_from_resource $nord9 color12 #000000
+set_from_resource $nord11 color9 #000000
+set_from_resource $nord13 color11 #000000
+set_from_resource $nord14 color10 #000000
+set_from_resource $nord15 color13 #000000
 
-# window colors
-# Colors                  border           background       text           indicator   child_border
-client.focused            $brightgrey      $brightgrey      $lightorange   $darkblack  $darkyellow
-client.focused_inactive   $brightgrey      $brightgrey      $lightorange   $darkblack  $black
-client.unfocused          $grey            $grey            $darkorange    $grey       $black
-client.urgent             $darkyellow      $darkyellow      $black         $darkred    $darkred
-client.background         $brightgrey
+set_from_resource $nord4  foreground #000000
+set_from_resource $nord0  background #000000
+
+set $nord0   #2E3440
+set $nord1   #3B4252
+set $nord2   #434C5E
+set $nord3   #4C566A
+set $nord4   #D8DEE9
+set $nord5   #E5E9F0
+set $nord6   #ECEFF4
+set $nord7   #8FBCBB
+set $nord8   #88C0D0
+set $nord9   #81A1C1
+set $nord10  #5E81AC
+set $nord11  #BF616A
+set $nord12  #D08770
+set $nord13  #EBCB8B
+set $nord14  #A3BE8C
+set $nord15  #B48EAD
+
+# Colors setup
+# class                 border  backgr. text    indicator child_border
+client.focused          $nord3  $nord9  $nord0    $nord13   $nord10
+client.focused_inactive $nord0  $nord3  $nord6    $nord7    $nord0
+client.unfocused        $nord0  $nord0  $nord3    $nord7    $nord1
+client.urgent           $nord11 $nord11 $nord0    $nord11   $nord11
+client.placeholder      $nord8  $nord0  $nord15   $nord0    $nord0
+client.background       $nord0
 
 # status bar settings
 bar {
     colors {
-        # Whole color settings
-        background $grey
-        separator  $brightgrey
-        statusline $lightorange
-
-        # Type             border          background      font
-        focused_workspace  $brightgrey     $brightgrey     $lightorange
-        active_workspace   $grey           $grey           $darkorange
-        inactive_workspace $grey           $grey           $darkorange
-        urgent_workspace   $darkyellow     $darkyellow     $black
-        }
-
+            background  $nord0
+            statusline  $nord8
+            separator   $nord6
+            # class            border   backgr. text
+            focused_workspace  $nord0   $nord0  $nord14
+            active_workspace   $nord0   $nord0  $nord12
+            inactive_workspace $nord0   $nord0  $nord3
+            urgent_workspace   $nord11  $nord0  $nord11
+            binding_mode       $nord0   $nord0  $nord14
+            }
     separator_symbol " | "
-    # tray_output none
+    tray_output none
     position top
     status_command py3status --dbus-notify
 }

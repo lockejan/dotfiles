@@ -1,6 +1,5 @@
 configuration {
-    modi: "window,drun,run,ssh,combi";
-    theme: "gruvbox-dark";
+    theme: "nord";
     combi-modi: "window,drun,run,ssh";
     terminal: "alacritty";
     run-shell-command: "{terminal} -e {cmd}";
