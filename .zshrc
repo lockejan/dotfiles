@@ -27,21 +27,12 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 plugins=(
-  ansible
-  django
-  docker
   fzf
-  git
   gpg-agent
-  lein
   poetry
   pip
-  pyenv
-  python
-  ripgrep
   sudo
   stack
-  tmux
   z
   zsh-autosuggestions
   # zsh-abbr
@@ -52,9 +43,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 alias vifm='~/.config/vifm/scripts/vifmrun'
-alias vim=nvim
-alias vi=nvim
-alias bt=bashtop
 alias i3c="$EDITOR ~/.config/i3/config"
 alias la="exa -la"
 alias lh="exa -lh"
@@ -62,7 +50,7 @@ alias ll="exa -l"
 alias ls="exa"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 alias reload="source ~/.zshrc"
-alias sipvpn="sudo openvpn --config ~/telearbeit"
+alias sipvpn="sudo -A openvpn --config ~/.config/openvpn/telearbeit"
 alias swayc="$EDITOR ~/.config/sway/config"
 alias update="yay && omz update && nvim +PlugUpdate +qall"
 alias vc="$EDITOR $VIMRC"
