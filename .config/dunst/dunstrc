@@ -130,7 +130,7 @@
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
-    alignment = left
+    alignment = center
 
     # Show age of message if message is older than show_age_threshold
     # seconds.
@@ -139,6 +139,7 @@
 
     # Split notifications into multiple lines if they don't fit into
     # geometry.
+    bounce_freq = 0
     word_wrap = yes
 
     # When word_wrap is set to no, specify where to make an ellipsis in long lines.
@@ -160,10 +161,10 @@
     ### Icons ###
 
     # Align icons left/right/off
-    icon_position = off
+    icon_position = left
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 64
+    max_icon_size = 32
 
     # Paths to default icons.
     icon_path = /usr/share/icons/ePapirus/16x16/status/:/usr/share/icons/ePapirus/16x16/mimetypes/:/usr/share/icons/ePapirus/16x16/devices/:/usr/share/icons/ePapirus/16x16/emblems/
