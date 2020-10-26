@@ -4,9 +4,15 @@
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
 numlockx &
-
-xset s off
-xset dpms 1800 1800 0
+# xset r rate 300 50 &
+dunst &
+picom &
+redshift &
+autorandr --change
+fusuma &
+gnome-pomodoro --no-default-window &
+i3-gnome-pomodoro daemon &
+amixer set Caputer -q 55%
 
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK

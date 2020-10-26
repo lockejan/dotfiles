@@ -83,15 +83,15 @@ focus_on_window_activation focus
 focus_follows_mouse yes
 
 # set workspace title decoration
-set $ws1 "1:  "
-set $ws2 "2:  "
-set $ws3 "3:  "
-set $ws4 "4:  "
-set $ws5 "5:  "
-set $ws6 "6:  "
-set $ws7 "7:  "
-set $ws8 "8:  "
-set $ws9 "9:  "
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -200,7 +200,7 @@ bindsym $mod+u [instance="dropdown"] scratchpad show
 
 # rofi config
 bindsym $mod+p exec rofi-pass
-bindsym $mod+d exec rofi -show combi
+bindsym $mod+d exec rofi -show drun
 # emoji keyboard and calendar
 bindsym $mod+Shift+d exec rofimoji
 bindsym $mod+udiaeresis exec "yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30"
@@ -265,7 +265,7 @@ bar {
             inactive_workspace $nord0   $nord0  $nord3
             urgent_workspace   $nord11  $nord0  $nord11
             binding_mode       $nord0   $nord0  $nord14
-            }
+           }
     separator_symbol " | "
     tray_output none
     position top
@@ -301,7 +301,7 @@ bindcode 148 exec gnome-calculator
 bindcode 180 exec firefox
 
 # i3-gaps conf
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 3
 gaps inner 7
 gaps outer 7
 # smart_gaps on
@@ -322,17 +322,18 @@ for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [class="Yad"] floating enable
 
 # Startup Apps
-exec --no-startup-id redshift &
-exec --no-startup-id dunst &
-exec --no-startup-id picom
-exec --no-startup-id autorandr --change
 exec --no-startup-id nextcloud &
-exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
-exec --no-startup-id fusuma &
-exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/8K_7680x4320.jpg
+# exec --no-startup-id nm-applet
+# exec --no-startup-id blueman-applet
+# exec --no-startup-id fusuma &
 # exec --no-startup-id imwheel -b 45
+exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/matterhorn-big.jpg
 
 # Lock screen
 set $Locker blurlock
 bindsym $mod+Shift+s exec --no-startup-id $Locker
+
+# Mail
+bindsym $mod+Shift+m exec $term -e aerc
+# Mail
+bindsym $mod+Shift+v exec $term -e sipvpn
