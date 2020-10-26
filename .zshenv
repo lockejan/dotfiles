@@ -31,3 +31,9 @@ export GOPATH="$HOME/go"
 # deno bin path
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+# EMACS
+export PATH="$PATH:$HOME/.emacs.d/bin"
+
+export TERMINAL="/usr/bin/alacritty"
+export INDICATOR="/usr/share/sounds/gnome/defaults/alerts/drip.ogg"

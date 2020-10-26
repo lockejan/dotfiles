@@ -13,7 +13,7 @@ font pango:Overpass Display, FontAwesome5Free, FontAwesome5Brands 13
 floating_modifier $mod
 
 # start a terminal
-set $term alacritty
+set $term $TERMINAL
 bindsym $mod+Return exec $term
 
 # kill focused window
@@ -273,7 +273,7 @@ bar {
 }
 
 # sound for vol changes
-set $indicator /usr/share/sounds/gnome/defaults/alerts/drip.ogg
+set $indicator $INDICATOR
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer set Master -q 5%+ unmute && paplay $indicator"
