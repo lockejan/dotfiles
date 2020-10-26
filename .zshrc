@@ -24,6 +24,8 @@ COMPLETION_WAITING_DOTS="true"
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+
 plugins=(
   ansible
   django
@@ -78,5 +80,4 @@ sipgateresolvconf ()
 }
 
 source ~/.io.env
-zle_bracketed_paste=()
 git-team disable > /dev/null
