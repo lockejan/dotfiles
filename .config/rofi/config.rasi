@@ -3,7 +3,7 @@ configuration {
     combi-modi: "window,drun,run,ssh";
     terminal: "alacritty";
     run-shell-command: "{terminal} -e {cmd}";
-    modi: "window,drun,run,ssh,combi";
+    modi: "drun,run,ssh,window,clipboard:greenclip print";
 	show-icons: true;
 	ssh-client: "ssh";
 	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";
@@ -15,7 +15,7 @@ configuration {
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/
-/*	font: "mono 12";*/
+	font: "mono 13";
 /*	bw: 1;*/
 /*	location: 0;*/
 /*	padding: 5;*/
