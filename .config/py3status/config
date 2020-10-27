@@ -8,29 +8,36 @@ general {
 	output_format = "i3bar"
 }
 
-py3status {
-}
-
 order += "external_script 1"
 order += "external_script 0"
-#order += "wifi"
+order += "bluetooth"
+order += "process_status VPN"
+order += "wireless _first_"
 order += "memory"
 order += "backlight"
-order += "volume master"
+order += "volume_status mic"
+order += "volume_status speakers"
 order += "battery all"
 order += "tztime local"
 
-external_script 0{
+external_script 0 {
     format = "{output}"
     script_path = "thesis-timer"
     cache_timeout = 60
 }
 
-external_script 1{
+external_script 1 {
     format = "{output}"
     script_path = "i3-gnome-pomodoro status"
     cache_timeout = 1
-    }
+}
+
+wireless _first_ {
+	format_down = ""
+	format_up = ""
+	on_click 1 = "exec nmcli radio wifi on"
+	on_click 3 = "exec nmcli radio wifi off"
+}
 
 backlight {
     cache_timeout = 3
@@ -42,27 +49,12 @@ memory {
     format_degraded = "MEMORY < %available"
 }
 
-volume master {
-    format = " %volume"
-    format_muted = " (%volume)"
-    device = "default"
-    mixer = "Master"
-    mixer_idx = 0
-}
-
 tztime local {
     format = " %a,%d.%m.  %H:%M"
 }
 
-arch_updates{
+arch_updates {
     format = " : {total}"
-    color_good = "#77DD77"
-    color_bad = "#FDFD96"
-    color_degraded = "#FF6961"
-}
-
-wifi {
-    format = '{signal_dbm} dBm'
 }
 
 battery all {
@@ -71,4 +63,41 @@ battery all {
     status_bat = ""
     status_unk = ""
     status_chr = ""
+}
+
+process_status VPN {
+	format = "{icon}"
+    cache_timeout = 3
+	icon_on = ""
+	icon_off = ""
+	process = "openvpn"
+}
+
+bluetooth {
+    format = ""
+    cache_timeout = 3
+	on_click 1 = "exec --no-startup-id bluetoothctl power on && bluetoothctl connect 90:7A:58:34:C0:B0"
+	on_click 3 = "exec --no-startup-id bluetoothctl power off"
+}
+
+volume_status mic {
+    format = ' {percentage}%'
+    format_muted = ' {percentage}%'
+	button_down = 5
+	button_mute = 1
+	button_up = 4
+	is_input = true
+	thresholds = [(0, 'bad'), (10, 'degraded'), (20, 'good')]
+}
+
+volume_status speakers {
+	command = "pactl"
+    cache_timeout = 2
+	format = ' {percentage}%'
+	format_muted = ' {percentage}%'
+	button_down = 5
+	button_mute = 1
+	button_up = 4
+	thresholds = [(0, 'bad'), (5, 'degraded'), (10, 'good')]
+	max_volume = 200
 }
