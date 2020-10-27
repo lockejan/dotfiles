@@ -16,15 +16,15 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
-    Plug 'unkiwii/vim-nerdtree-sync'
-    Plug 'vifm/vifm.vim'
+"    Plug 'unkiwii/vim-nerdtree-sync'
+"    Plug 'vifm/vifm.vim'
     Plug 'vim-airline/vim-airline'
     " Plug 'wellle/targets.vim'
 " Syntax
-    Plug 'mboughaba/i3config.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'sheerun/vim-polyglot'
 " Color-schemes
+    Plug 'arcticicestudio/nord-vim',
     Plug 'morhetz/gruvbox'
 call plug#end()
 
@@ -56,12 +56,14 @@ nmap ) <Plug>(GitGutterNextHunk)
 nmap ( <Plug>(GitGutterPrevHunk)
 
 " Color settings
-colorscheme gruvbox
+colorscheme nord
 set background=dark
 hi! Normal ctermbg=NONE guibg=NONE
 
 " Statusline config
-let g:airline_theme='gruvbox'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#enabled = 1
 
@@ -88,7 +90,7 @@ let g:plug_window = 'noautocmd vertical topleft new'
 let NERDTreeShowHidden=1
 
 " If more than one window and previous buffer was NERDTree, go back to it.
-autocmd BufRead * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+"autocmd BufRead * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 
 function! IsNERDTreeOpen()
   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
@@ -105,9 +107,9 @@ endfunction
 
 " Highlight currently open buffer in NERDTree
 " autocmd BufRead * call SyncTree()
-autocmd BufRead * call SyncTree()
+"autocmd BufRead * call SyncTree()
 
-augroup nerdtree_open
-    autocmd!
-    autocmd VimEnter * NERDTree | wincmd p
-augroup END
+" augroup nerdtree_open
+"     autocmd!
+"     autocmd VimEnter * NERDTree | wincmd p
+" augroup END
