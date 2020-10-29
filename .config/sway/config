@@ -31,10 +31,9 @@ set $menu rofi -show combi | xargs swaymsg exec --
 set $pass rofi-pass | xargs swaymsg exec --
 
 
-
 # Gaps
 #
-for_window [title="^.*"] border pixel 2
+for_window [title="^.*"] border pixel 3
 gaps inner 5
 smart_gaps on
 smart_borders on
@@ -43,13 +42,20 @@ smart_borders on
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/f31/default/normalish/f31.png fill
-output * bg ~/Pictures/photography-of-leaves.jpg fill
+output * bg ~/Pictures/Wallpaper/matterhorn-big.jpg fill
 
 #
 # Example configuration:
 #
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#output HDMI-A-1 scale 1
+set $laptop eDP-1
+output HDMI-A-2 pos 0 0 resolution 2560x1440 scale 1
+# output eDP-1 pos 1280 0 resolution 2560x1440 scale 1
+output $laptop disable
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+# output DP-1 layout none mirror HDMI-A-1
+# output eDP-1 re
+# output HDMI-A-2 mirror eDP-1
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -71,6 +77,12 @@ input "1133:16471:Logitech_B330/M330/M331" {
     natural_scroll enabled
     middle_emulation enabled
 }
+
+input 1739:0:Synaptics_TM3276-022 {
+  natural_scroll enabled
+  tap enabled
+}
+
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -90,15 +102,15 @@ input "1133:16471:Logitech_B330/M330/M331" {
 # Workspaces:
 #
     # aliases for workspaces
-    set $ws1 "1:  "
-    set $ws2 "2:  "
-    set $ws3 "3:  "
-    set $ws4 "4:  "
-    set $ws5 "5:  "
-    set $ws6 "6:  "
-    set $ws7 "7:  "
-    set $ws8 "8:  "
-    set $ws9 "9:  "
+    set $ws1 "1"
+    set $ws2 "2"
+    set $ws3 "3"
+    set $ws4 "4"
+    set $ws5 "5"
+    set $ws6 "6"
+    set $ws7 "7"
+    set $ws8 "8"
+    set $ws9 "9"
 
 bindsym --to-code {
 
@@ -273,47 +285,54 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
+# colors
+set $nord0   #2E3440
+set $nord1   #3B4252
+set $nord2   #434C5E
+set $nord3   #4C566A
+set $nord4   #D8DEE9
+set $nord5   #E5E9F0
+set $nord6   #ECEFF4
+set $nord7   #8FBCBB
+set $nord8   #88C0D0
+set $nord9   #81A1C1
+set $nord10  #5E81AC
+set $nord11  #BF616A
+set $nord12  #D08770
+set $nord13  #EBCB8B
+set $nord14  #A3BE8C
+set $nord15  #B48EAD
+
+# Colors setup
+# class                 border  backgr. text    indicator child_border
+client.focused          $nord3  $nord9  $nord0    $nord13   $nord10
+client.focused_inactive $nord0  $nord3  $nord6    $nord7    $nord0
+client.unfocused        $nord0  $nord0  $nord3    $nord7    $nord1
+client.urgent           $nord11 $nord11 $nord0    $nord11   $nord11
+client.placeholder      $nord8  $nord0  $nord15   $nord0    $nord0
+client.background       $nord0
+
 # Status Bar:
-#
 # Read `man 5 sway-bar` for more information about this section.
-
-# Color scheme (Gruvbox dark)
-set $color_normal_white  #a89984
-set $color_bright_white  #ebdbb2
-set $color_normal_gray   #222222
-set $color_bright_gray   #3c3836
-set $color_bright_yellow #d79921
-set $color_normal_black  #282828
-set $color_unused        #ff0000
-
-# Colors                  border                 background             text                   indicator            child_border
-client.focused            $color_bright_gray     $color_bright_gray     $color_bright_white    $color_bright_gray   $color_bright_yellow
-client.focused_inactive   $color_bright_gray     $color_bright_gray     $color_bright_white    $color_bright_gray   $color_normal_black
-client.unfocused          $color_normal_gray     $color_normal_gray     $color_normal_white    $color_normal_gray   $color_normal_black
-client.urgent             $color_bright_yellow   $color_bright_yellow   $color_normal_black    $color_unused        $color_unused
-client.placeholder        $color_unused          $color_unused          $color_unused          $color_unused        $color_unused
-
-# Bar
+# status bar settings
 bar {
     colors {
-        # Whole color settings
-        background $color_normal_gray
-        separator  $color_bright_gray
-        statusline $color_bright_white
-
-        # Type             border                 background              font
-        focused_workspace  $color_bright_gray     $color_bright_gray      $color_bright_white
-        active_workspace   $color_normal_gray     $color_normal_gray      $color_normal_white
-        inactive_workspace $color_normal_gray     $color_normal_gray      $color_normal_white
-        urgent_workspace   $color_bright_yellow   $color_bright_yellow    $color_normal_black
-    }
-
-    separator_symbol "  |  "
-    status_command py3status --dbus-notify 
+            background  $nord0
+            statusline  $nord8
+            separator   $nord6
+            # class            border   backgr. text
+            focused_workspace  $nord0   $nord0  $nord14
+            active_workspace   $nord0   $nord0  $nord12
+            inactive_workspace $nord0   $nord0  $nord3
+            urgent_workspace   $nord11  $nord0  $nord11
+            binding_mode       $nord0   $nord0  $nord14
+           }
+    separator_symbol " | "
+    tray_output none
     position top
-    # tray_output none
+    status_command py3status --dbus-notify
 }
+
 
 set $mode_system "System (l)ock, (e)xit, (s)uspend, (r)eboot, (Shift+s) shutdown"
 mode $mode_system {
@@ -334,14 +353,20 @@ mode $mode_system {
 bindsym $mod+0 mode $mode_system
 bindsym $mod+KP_0 mode $mode_system
 
-bindsym $mod+F1 exec "yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30"
-bindsym $mod+F9 exec "~/bin/i3-gnome-pomodoro/pomodoro-client.py start"
-bindsym $mod+F10 exec "~/bin/i3-gnome-pomodoro/pomodoro-client.py toggle"
-bindsym $mod+F11 exec "~/bin/i3-gnome-pomodoro/pomodoro-client.py skip"
-bindsym $mod+F12 exec "~/bin/i3-gnome-pomodoro/pomodoro-client.py stop"
+bindsym $mod+F1  exec "yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30"
+bindsym $mod+F9  exec "i3-gnome-pomodoro start"
+bindsym $mod+F10 exec "i3-gnome-pomodoro toggle"
+bindsym $mod+F11 exec "i3-gnome-pomodoro skip"
+bindsym $mod+F12 exec "i3-gnome-pomodoro stop"
+
+# brightness controls
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym $mod+Shift+0 exec brightnessctl set 0
+
 
 # sound for vol changes
-set $indicator /usr/share/sounds/gnome/default/alerts/drip.ogg
+set $indicator $INDICATOR
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec "amixer set Master -q 5%+ unmute && paplay $indicator"
@@ -362,37 +387,22 @@ xkb_options caps:escape
 # workspace assign for apps
 assign [class="Firefox"] $ws2
 assign [class="Code"] $ws3
-assign [class="TrueFire 3"] $ws7
-assign [class="Thunderbird"] $ws9
 assign [class="jetbrains-*-ce"] $ws4
-for_window [class="Spotify"] move to workspace $ws8 
 for_window [class="Gnome-pomodoro"] floating enable focus
 for_window [class="Gnome-calculator"] floating enable focus
-for_window [class="JetBrains Toolbox"] floating enable
-for_window [class="Signal"] floating enable
 for_window [class="Pomodoro"] floating enable
-for_window [class="Skype"] floating enable
 for_window [class="vlc"] floating enable
 for_window [class="jetbrains-.*" title="win0"] floating enable
 for_window [class="^jetbrains-.+"][window_type=dialog] focus 
 for_window [class="Yad"] floating enable
 
-# open jetbrains toolbox
-set $toolbox .local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
-bindsym $mod+Shift+t exec $toolbox ---class "JetBrains Toolbox
-
-exec xrdb ~/.Xresources
-exec nextcloud 
-exec redshift -l 51.20:6.80 -t 5600:3400
-# exec skypeforlinux
-exec $toolbox --minimize --class "JetBrains Toolbox"
-exec spotify
-exec mako
-# exec "~/bin/i3-gnome-pomodoro/pomodoro-client.py daemon &"
+# startup apps
+exec nextcloud &
+exec gammastep -l 51.20:6.80 -t 5600:3400 &
+exec mako &
+exec "i3-gnome-pomodoro daemon &"
+exec xrdb -load ~/.Xresources
 
 # Lock screen
 set $Locker swaylock
 bindsym $mod+Shift+s exec $Locker
-
-exec setxkbmap -layout de
-# exec ssh-agent.sh

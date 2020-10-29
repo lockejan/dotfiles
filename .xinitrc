@@ -8,7 +8,7 @@ sxhkd -m -1 &
 # xset r rate 300 50 &
 dunst &
 picom &
-redshift &
+gammastep &
 autorandr --change
 fusuma &
 gnome-pomodoro --no-default-window &
