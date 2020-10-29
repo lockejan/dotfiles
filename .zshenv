@@ -35,5 +35,6 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 # EMACS
 export PATH="$PATH:$HOME/.emacs.d/bin"
 
+export SXHKD_SHELL="/bin/bash"
 export TERMINAL="/usr/bin/alacritty"
 export INDICATOR="/usr/share/sounds/gnome/defaults/alerts/drip.ogg"

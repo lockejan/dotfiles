@@ -3,7 +3,7 @@
 set $mod Mod4
 
 # Hide borders
-hide_edge_borders smart_no_gaps
+hide_edge_borders smart
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -16,133 +16,12 @@ floating_modifier $mod
 set $term $TERMINAL
 bindsym $mod+Return exec $term
 
-# kill focused window
-bindsym $mod+q kill
-
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-bindsym $mod+c split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+Shift+a focus parent
-
-# focus the child container
-bindsym $mod+a focus child
-
-#navigate workspaces next / previous
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+l workspace next
-bindsym $mod+Ctrl+Left workspace prev
-bindsym $mod+Ctrl+h workspace prev
-
 # quick ws toggle
 workspace_auto_back_and_forth yes
 
 # move focus on activation
 focus_on_window_activation focus
 focus_follows_mouse yes
-
-# set workspace title decoration
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-
-# switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-
-bindsym $mod+mod2+KP_1 workspace $ws1
-bindsym $mod+mod2+KP_2 workspace $ws2
-bindsym $mod+mod2+KP_3 workspace $ws3
-bindsym $mod+mod2+KP_4 workspace $ws4
-bindsym $mod+mod2+KP_5 workspace $ws5
-bindsym $mod+mod2+KP_6 workspace $ws6
-bindsym $mod+mod2+KP_7 workspace $ws7
-bindsym $mod+mod2+KP_8 workspace $ws8
-bindsym $mod+mod2+KP_9 workspace $ws9
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-
-# move focused container to workspace (numpad)
-bindsym $mod+Shift+mod2+KP_End move container to workspace number $ws1
-bindsym $mod+Shift+mod2+KP_Down move container to workspace number $ws2
-bindsym $mod+Shift+mod2+KP_Next move container to workspace number $ws3
-bindsym $mod+Shift+mod2+KP_Left move container to workspace number $ws4
-bindsym $mod+Shift+mod2+KP_Begin move container to workspace number $ws5
-bindsym $mod+Shift+mod2+KP_Right move container to workspace number $ws6
-bindsym $mod+Shift+mod2+KP_Home move container to workspace number $ws7
-bindsym $mod+Shift+mod2+KP_Up move container to workspace number $ws8
-bindsym $mod+Shift+mod2+KP_Prior move container to workspace number $ws9
-bindsym $mod+Shift+mod2+KP_Insert move container to workspace number $ws10
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# kill x server
-bindsym $mod+Shift+x exec pkill -15 Xorg
 
 # Set shut down, restart and locking features
 bindsym $mod+0 mode "$mode_system"
@@ -181,35 +60,11 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Make the currently focused window a scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the first scratchpad window
-bindsym $mod+minus scratchpad show
-
 # init dropdown windows
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 exec --no-startup-id $term --class dropdown -e tmux
 bindsym $mod+u [instance="dropdown"] scratchpad show
-
-# for_window [instance="pomodoro"] floating enable
-# for_window [instance="pomodoro"] move scratchpad
-# exec --no-startup-id gnome-pomodoro --class pomodoro
-# bindsym $mod+i [instance="pomodoro"] scratchpad show
-
-# rofi config
-bindsym $mod+p exec rofi-pass
-bindsym $mod+d exec rofi -show drun
-# emoji keyboard and calendar
-bindsym $mod+Shift+d exec rofimoji
-bindsym $mod+udiaeresis exec "yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30"
-
-# Pomodoro
-bindsym $mod+F9 exec --no-startup-id i3-gnome-pomodoro start
-bindsym $mod+F10 exec --no-startup-id i3-gnome-pomodoro toggle
-bindsym $mod+F11 exec --no-startup-id i3-gnome-pomodoro skip
-bindsym $mod+F12 exec --no-startup-id i3-gnome-pomodoro stop
 
 # Colors
 set_from_resource $nord1 color0 #000000
@@ -272,30 +127,6 @@ bar {
     status_command py3status --dbus-notify
 }
 
-# sound for vol changes
-set $indicator $INDICATOR
-
-# Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer set Master -q 5%+ unmute && paplay $indicator"
-bindsym XF86AudioLowerVolume exec --no-startup-id "amixer set Master -q 5%- unmute && paplay $indicator"
-bindsym XF86AudioMute exec --no-startup-id "amixer -q -D pulse set Master toggle"
-
-# brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-bindsym Shift+XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
-bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
-bindsym $mod+Shift+0 exec --no-startup-id xbacklight -set 0
-
-# screenshot
-bindsym --release Shift+Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
-bindsym --release Print exec --no-startup-id "maim -s -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
-
-bindsym $mod+n exec thunar
-
-# Pause key for media control
-bindsym Pause exec --no-startup-id playerctl play-pause
-
 # hotkeys to open apps with symboled keys
 bindcode 148 exec gnome-calculator
 bindcode 180 exec firefox
@@ -325,15 +156,5 @@ for_window [class="Yad"] floating enable
 exec --no-startup-id nextcloud &
 # exec --no-startup-id nm-applet
 # exec --no-startup-id blueman-applet
-# exec --no-startup-id fusuma &
 # exec --no-startup-id imwheel -b 45
 exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/matterhorn-big.jpg
-
-# Lock screen
-set $Locker blurlock
-bindsym $mod+Shift+s exec --no-startup-id $Locker
-
-# Mail
-bindsym $mod+Shift+m exec $term -e aerc
-# Mail
-bindsym $mod+Shift+v exec $term -e sipvpn

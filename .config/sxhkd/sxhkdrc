@@ -1,0 +1,166 @@
+# vim: set ft=sxhkdrc:
+
+# 1 Global {{{1                                                         :global:
+# =============
+# Reload sxhkd config
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# Terminal
+#super + Return
+#    $TERMINAL
+
+# Rofi
+ctrl + space
+    rofi -show run
+mod4 + p
+    rofi-pass
+mod4 + d
+    rofi -show drun
+mod4 + shift + d
+    rofimoji
+mod4 + p
+    rofi-pass
+{alt,mod4} + Tab
+    rofi -show window
+# Rofi; ssh hosts
+ctrl + alt + s
+    rofi -show ssh
+
+## screenshot
+shift + @Print
+    maim -p 0 -c 0.96,0.5,0.09 "${HOME}/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+@Print
+    maim -s -p 0 -c 0.96,0.5,0.09 "${HOME}/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+
+mod4 + udiaeresis
+    yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30
+
+
+# kill x server
+super + shift + x
+    pkill -15 Xorg
+
+# Basic binds
+super + shift + adiaeresis
+	$TERMINAL -e pulsemixer
+super + shift + w
+	$TERMINAL -e sudo nmtui
+# Mailer
+mod4 + shift + m
+    $TERMINAL -e aerc
+# Spotlight clone
+mod4 + shift + p
+    albert show
+
+# Change display
+super + F7
+	displayselect
+
+# Screenlock
+mod4 + shift + s
+    blurlock
+
+## sound for vol changes
+## Pulse Audio controls
+XF86AudioRaiseVolume
+    amixer set Master -q 5%+ unmute && paplay ${INDICATOR}
+XF86AudioLowerVolume
+    amixer set Master -q 5%- unmute && paplay ${INDICATOR}
+XF86AudioMute
+    amixer -q -D pulse set Master toggle
+
+## brightness controls
+XF86MonBrightnessUp
+    xbacklight -inc 10
+XF86MonBrightnessDown
+    xbacklight -dec 10
+mod4 + shift + 0
+    xbacklight -set 0
+
+## file manager
+mod4 + n
+    thunar
+
+## Pause key for media control
+Pause
+    playerctl play-pause
+
+## Pomodoro
+mod4 + {F9,F10,F11,F12}
+    i3-gnome-pomodoro {start,toggle,skip,stop}
+
+# i3
+# =======
+
+# Change focus / move focused window
+mod4 + {_,shift +}{h,j,k,l}
+    i3-msg {focus,move} {left,down,up,right}
+mod4 + {_,shift +}{Left,Down,Up,Right}
+    i3-msg {focus,move} {left,down,up,right}
+
+# switch to workspace or move container to workspace
+mod4 + {_, shift +}{1,2,3,4,5,6,7,8,9}
+    i3-msg {workspace,move container to workspace} {1,2,3,4,5,6,7,8,9}
+
+# switch to workspace or move container to workspace using numeric Keypad
+mod4 + {mod2, shift +}{1,2,3,4,5,6,7,8,9}
+    i3-msg {workspace,move container to workspace} {1,2,3,4,5,6,7,8,9}
+
+# navigate workspaces next / previous
+mod4 + ctrl + {h,l}
+    i3-msg {workspace} {prev,next}
+mod4 + ctrl + {Left,Right}
+    i3-msg {workspace} {prev,next}
+
+# Kill focused window
+mod4 + q
+    i3-msg kill
+
+# Split in horizontal/vertical orientation
+mod4 + {c,v}
+    i3-msg split {h,v}
+
+# Enter fullscreen mode for the focused container
+mod4 + f
+    i3-msg fullscreen toggle
+
+# Change container layout (stacked, tabbed, toggle split)
+mod4 + {s,t,e}
+    i3-msg layout {stacked, tabbed, toggle split}
+
+# Toggle window floating
+mod4 + shift + space
+    i3-msg floating toggle
+
+# Change focus between tiling and floating windows
+mod4 + space
+    i3-msg focus mode_toggle
+
+# Focus parent container
+mod4 + shift + a
+    i3-msg focus parent
+
+# Focus child container
+mod4 + a
+    i3-msg focus child
+
+# 'Minimize' / move windows to scratchpad
+mod4 + m
+    i3-msg move scratchpad
+
+# Cycle through 'minimized' windows
+mod4 + shift + m
+    i3-msg scratchpad show
+
+# i3; reload config
+mod4 + shift + c
+    i3-msg reload
+
+# i3; restart i3 in-place (preserves layout/session)
+mod4 + shift + r
+    i3-msg restart
+
+# i3; exit (ends X session)
+mod4 + shift + e
+    i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'
