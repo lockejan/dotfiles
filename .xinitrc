@@ -5,7 +5,6 @@
 
 numlockx &
 sxhkd -m -1 &
-# xset r rate 300 50 &
 dunst &
 picom &
 gammastep &
@@ -14,6 +13,7 @@ fusuma &
 gnome-pomodoro --no-default-window &
 i3-gnome-pomodoro daemon &
 amixer set Capture -q 55%
+disable-dpms &
 
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
