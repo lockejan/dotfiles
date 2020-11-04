@@ -5,10 +5,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+source /etc/zsh/zpreztorc
+source /usr/lib/prezto/init.zsh
+source /usr/lib/prezto/runcoms/zshrc
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
 
 DEFAULT_USER=schmitt
 
@@ -24,48 +25,61 @@ COMPLETION_WAITING_DOTS="true"
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-zstyle ':bracketed-paste-magic' active-widgets '.self-*'
-
-plugins=(
-  fzf
-  gpg-agent
-  poetry
-  pip
-  sudo
-  stack
-  z
-  zsh-autosuggestions
-  # zsh-abbr
-  zsh-syntax-highlighting
-)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
+# shortcuts
 alias vifm='~/.config/vifm/scripts/vifmrun'
 alias i3c="$EDITOR ~/.config/i3/config"
+alias sxc="$EDITOR ~/.config/sxhkd/sxhkdrc"
+alias dps="docker ps"
+alias dpsa="docker ps -a"
+alias chrome="google-chrome-stable"
 alias la="exa -la"
 alias lh="exa -lh"
 alias ll="exa -l"
 alias ls="exa"
-alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
-alias reload="source ~/.zshrc"
+alias reload="source ~/.zshrc && zinit self-update"
 alias sipvpn="sudo -A openvpn --config ~/.config/openvpn/telearbeit"
 alias swayc="$EDITOR ~/.config/sway/config"
+alias tx=tmuxinator
 alias update="yay && omz update && nvim +PlugUpdate +qall"
 alias vc="$EDITOR $VIMRC"
 alias vf='$EDITOR $(fzf)'
 alias zc="$EDITOR ~/.zshrc"
 
+# haskell stack completion for zsh
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+eval "$(stack --bash-completion-script stack)"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-sipgateresolvconf ()
-{
-    sudo sed -i 's/^\(nameserver.*$\)/## old nameserver entry: \1/' /etc/resolv.conf;
-    echo "nameserver 217.10.64.99" | sudo tee -a /etc/resolv.conf;
-    echo "nameserver 217.10.66.66" | sudo tee -a /etc/resolv.conf
-}
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
 
-source ~/.io.env
-git-team disable > /dev/null
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node \
+    zdharma/fast-syntax-highlighting \
+    zsh-users/zsh-autosuggestions \
+    darvid/zsh-poetry
+
+### End of Zinit's installer chunk
+zinit load zdharma/history-search-multi-word
+
+# Load the pure theme, with zsh-async library that's bundled with it.
+# zinit ice pick"async.zsh" src"pure.zsh"
+# zinit light sindresorhus/pure
