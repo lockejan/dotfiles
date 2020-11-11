@@ -7,12 +7,12 @@ super + Escape
     pkill -USR1 -x sxhkd
 
 # Terminal
-#super + Return
-#    $TERMINAL
+super + Return
+    $TERMINAL
 
 # Rofi
-#ctrl + space
-#    rofi -show run
+ctrl + space
+    rofi -show run
 mod4 + p
     rofi-pass
 mod4 + d
@@ -23,9 +23,9 @@ mod4 + p
     rofi-pass
 {alt,mod4} + Tab
     rofi -show window
-# Rofi; ssh hosts
-ctrl + alt + s
-    rofi -show ssh
+## Rofi; ssh hosts
+#ctrl + alt + s
+#    rofi -show ssh
 
 ## screenshot
 shift + @Print
@@ -50,8 +50,8 @@ super + shift + w
 mod4 + shift + m
     $TERMINAL -e aerc
 # Spotlight clone
-mod4 + shift + p
-    albert show
+#mod4 + shift + p
+#    albert show
 
 # Change display
 super + F7

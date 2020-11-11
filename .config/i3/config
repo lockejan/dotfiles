@@ -139,11 +139,10 @@ gaps outer 7
 smart_borders on
 
 # workspace assign for apps
-assign [class="firefox|firefoxdeveloperedition" window_role="browser"] 2
-assign [class="code-oss" window_role="browser-window"] 3
-assign [class="jetbrains-.*"] 3
+# assign [class="firefox|firefoxdeveloperedition" window_role="browser"] 2
+# assign [class="code-oss" window_role="browser-window"] 3
+# assign [class="jetbrains-.*"] 3
 assign [class="discord"] 7
-assign [class="deezer-nativefier-*"] 8
 for_window [class="Gnome-pomodoro"] floating enable focus
 for_window [class="Pomodoro"] floating enable
 for_window [class="Gnome-calculator"] floating enable focus
@@ -154,6 +153,7 @@ for_window [class="Yad"] floating enable
 
 # Startup Apps
 exec --no-startup-id nextcloud &
+exec --no-startup-id sxhkd -m -1 &
 # exec --no-startup-id nm-applet
 # exec --no-startup-id blueman-applet
 # exec --no-startup-id imwheel -b 45

@@ -54,34 +54,3 @@ Xft.rgba: rgb
 *.color13: nord15
 *.color14: nord7
 *.color15: nord6
-
-URxvt.font: xft:monospace:pixelsize=14,xft:JoyPixels:pixelsize=10,xft:FontAwesome5Free:size=13,xft.FontAwesome5Brands:size=13
-
-URxvt*depth: 32
-URxvt.background: [85]nord0
-
-URxvt.iso14755: false
-URxvt.iso14755_52: false
-URxvt*scrollBar: false
-!clickable urls
-URxvt.perl-ext-common: default,matcher
-
-URxvt.perl-ext: default,url-select,resize-font
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: /usr/bin/xdg-open
-URxvt.url-select.underline: true
-
-/* URxvt.url-launcher: /usr/bin/xdg-open */
-URxvt.matcher.button: 1
-
-! do not scroll with output
-URxvt*scrollTtyOutput: false
-
-! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-URxvt*scrollWithBuffer: true
-
-! scroll back to the bottom on keypress
-URxvt*scrollTtyKeypress: true
-
-! reduce font-spacing
-URxvt.letterSpace: -1
