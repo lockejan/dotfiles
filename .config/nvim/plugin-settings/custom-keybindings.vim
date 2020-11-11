@@ -14,6 +14,16 @@ nnoremap <leader>cd :cd %:p:h<CR>
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! SudaWrite
 
+" delete without yanking
+nnoremap <leader>d "_dd
+vnoremap <leader>d "_dd
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap <leader>p "_dP
+
+nnoremap <leader>p "0p
+
 " split movemment
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>

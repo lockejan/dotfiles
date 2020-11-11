@@ -2,7 +2,8 @@
 set autoindent
 set autoread		" auto re-read files if unmodified inside Vim
 set backspace=indent,eol,start
-set clipboard=unnamedplus               " Copy paste between vim and everything else
+" set clipboard=unnamedplus               " Copy paste between vim and everything else
+" set clipboard="+
 set confirm
 set cursorline
 set encoding=UTF-8
