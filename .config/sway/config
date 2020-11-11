@@ -19,17 +19,15 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-#set $term urxvt256c-ml
-#set $term tilix
-set $term alacritty
+set $term $TERMINAL
 
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
- set $alt_menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
+set $alt_menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
 set $menu rofi -show combi | xargs swaymsg exec --
 set $pass rofi-pass | xargs swaymsg exec --
-
+set $bemenu bemenu-run
 
 # Gaps
 #
@@ -123,14 +121,25 @@ bindsym --to-code {
     # start your launcher
     $mod+d exec $menu
     $mod+Alt+d exec $alt_menu
-    
-    $mod+Shift+d exec rofimoji 
-    
+    $mod+Shift+d exec rofimoji
+
     # rofi-pass
-    $mod+p exec rofi-pass 
-    
-    # screenshot
-    Print exec grim -g "$(slurp)"
+    $mod+p exec rofi-pass
+
+    # take screenshot of area
+    Print exec grim -g "$(slurp)" "${HOME}/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+
+    # take screenshot of whole screen
+    Shift+Print exec grim "${HOME}/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+
+    # rec screenrecording partial
+    # $mod+r exec wf-recorder -g "$(slurp)" --file="${HOME}/Pictures/screencast-$(date +%Y-%m-%d_%H-%M-%S).mp4"
+
+    # rec fullscreen with audio
+    $mod+Shift+r exec wf-recorder --audio --file="${HOME}/Pictures/screencast-$(date +%Y-%m-%d_%H-%M-%S).mp4"
+
+    # stop recording
+    $mod+Shift+e exec killall wf-recorder
 
     # reload the configuration file
     $mod+Shift+c reload
@@ -182,7 +191,7 @@ bindsym --to-code {
     # $mod+Shift+0 move container to $ws10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
-    
+
     # switch to workspace
     $mod+KP_1 workspace $ws1
     $mod+KP_2 workspace $ws2
@@ -372,7 +381,7 @@ set $indicator $INDICATOR
 bindsym XF86AudioRaiseVolume exec "amixer set Master -q 5%+ unmute && paplay $indicator"
 bindsym XF86AudioLowerVolume exec "amixer set Master -q 5%- unmute && paplay $indicator"
 bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
- 
+
 # Pause key for media control
 bindsym Pause exec playerctl play-pause
 
@@ -393,12 +402,12 @@ for_window [class="Gnome-calculator"] floating enable focus
 for_window [class="Pomodoro"] floating enable
 for_window [class="vlc"] floating enable
 for_window [class="jetbrains-.*" title="win0"] floating enable
-for_window [class="^jetbrains-.+"][window_type=dialog] focus 
+for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [class="Yad"] floating enable
 
 # startup apps
 exec nextcloud &
-exec gammastep -l 51.20:6.80 -t 5600:3400 &
+exec gammastep -l 51.20:6.80 -t 5600:3400 -g 0.9 &
 exec mako &
 exec "i3-gnome-pomodoro daemon &"
 exec xrdb -load ~/.Xresources
@@ -406,3 +415,12 @@ exec xrdb -load ~/.Xresources
 # Lock screen
 set $Locker swaylock
 bindsym $mod+Shift+s exec $Locker
+
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Nordic'
+    gsettings set $gnome-schema icon-theme 'Papirus Dark'
+    gsettings set $gnome-schema cursor-theme 'Adwaita'
+}

@@ -10,12 +10,12 @@ general {
 
 order += "external_script 1"
 order += "external_script 0"
-order += "arch_updates"
+# order += "arch_updates"
 order += "bluetooth"
 order += "process_status VPN"
 order += "wireless _first_"
 order += "memory"
-order += "backlight"
+# order += "backlight"
 order += "volume_status mic"
 order += "volume_status speakers"
 order += "battery all"
@@ -55,7 +55,7 @@ tztime local {
 }
 
 arch_updates {
-    format = " : {pacman}"
+    format = ": {pacman}"
 }
 
 battery all {
