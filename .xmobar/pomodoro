@@ -1,0 +1,5 @@
+#! /bin/zsh
+
+STATUS=$(i3-gnome-pomodoro status)
+
+echo -e "$STATUS"
