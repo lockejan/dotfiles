@@ -40,7 +40,7 @@ alias reload="source ~/.zshrc && zinit self-update"
 alias sipvpn="sudo -A openvpn --config ~/.config/openvpn/telearbeit"
 alias swayc="$EDITOR ~/.config/sway/config"
 alias tx=tmuxinator
-alias update="yay && omz update && nvim +PlugUpdate +qall"
+alias update="yay && zinit self-update && nvim +PlugUpdate +qall"
 alias vc="$EDITOR $VIMRC"
 alias vf='$EDITOR $(fzf)'
 alias zc="$EDITOR ~/.zshrc"
@@ -79,7 +79,4 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 zinit load zdharma/history-search-multi-word
-
-# Load the pure theme, with zsh-async library that's bundled with it.
-# zinit ice pick"async.zsh" src"pure.zsh"
-# zinit light sindresorhus/pure
+zinit load agkozak/zsh-z

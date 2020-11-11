@@ -1,17 +1,70 @@
-Config
-{ bgColor =      "white"
-, fgColor =      "black"
-, border =       BottomB
-, borderColor = "black"
-, commands = -- what information to show
-  -- network activity monitor (dynamic interface resolution)
-  [ Run DynNetwork [] 10 -- network traffic
-  , Run Memory ["-t" ,"RAM: <usedratio>%"] 10 -- RAM usage
-  , Run Battery [] 10 -- battery time
-  , Run Volume "default" "Master" [] 10
-  , Run Date "%d %b %T" "mydate" 10
-  , Run StdinReader -- text coming from xmonad
-  ]
--- where to show command information
-, template = "%StdinReader% }{ %memory% | %default:Master% | %dynnetwork% | %battery% | %mydate% |"
-}
+-- vim:syntax=haskell
+Config {
+        font = "xft:Overpass Display:size=13"
+       , additionalFonts = ["xft:Font Awesome:size=12","xft:Font Awesome 5 Free Solid:size=12", "xft:Font Awesome 5 Brands:size=12"]
+       , bgColor = "#2E3440"
+       , fgColor = "#88C0D0"
+       , border = BottomB 1
+       , borderColor = "#c5c8c6"
+       , position = TopW L 100
+       , lowerOnStart = True
+       , hideOnStart = False
+       , persistent = True
+       , allDesktops = True
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %StdinReader% }{ %pom% <fc=#ffffff>|</fc>  <fn=2></fn> %thesis%  <fc=#ffffff>|</fc>  %memory%  <fc=#ffffff>|</fc>  <action=`pavucontrol`>%default:Master% %default:Capture%</action>  <fc=#ffffff>|</fc>  %wlp3s0wi%  <fc=#ffffff>|</fc>  %battery%  <fc=#ffffff>|</fc> <action=`xclock`>%date%</action>"
+       , commands = [ Run Date "<fn=1>\xf073</fn> %a %b %_d <fn=1>\xf017</fn> %H:%M " "date" 10,
+                      Run StdinReader,
+                      Run Com "python" ["/home/schmitt/bin/thesis-timer"] "thesis" 20,
+                      Run Com "zsh" ["/home/schmitt/.xmobar/vpn"] "vpn" 15,
+                      Run Com "zsh" ["/home/schmitt/.xmobar/pomodoro"] "pom" 15,
+                      -- bluetooth, openvpn, input sink volume, memory
+                      Run Memory [
+                                  "-t" ,"<usedipat><fn=2>\xf538</fn> <usedratio>%"
+                                  -- "-t" ,"Mem: <usedratio>%"
+                                , "--Low"      , "20"        -- units: %
+                                , "--High"     , "90"        -- units: %
+                                , "--low"      , "#A3BE8C"
+                                , "--normal"   , "#88C0D0"
+                                , "--high"     , "#D08770"
+                                --,"--used-icon-pattern","<fn=1>\xf538</fn>"
+                                --,"--available-icon-pattern", "<fn=1>\xf538</fn>"
+                                ] 10,
+                      Run Battery [
+                                   "--template" , "<acstatus>",
+                                   "--Low"      , "10",       -- units: %
+                                   "--High"     , "50",       -- units: %
+                                   "--low"      , "#BF616A",
+                                   "--normal"   , "#D08770",
+                                   "--", -- battery specific options
+                                   -- discharging status
+                                   "-o"	, "<leftipat> <left>%",
+                                   -- AC "on" status
+                                   "-O"	, "<leftipat> <left>%",
+                                   "-i"	, "<leftipat> <left>%",
+                                   -- charged status
+                                   --"-i"	, "<fn=1>\xf240</fn>",
+                                   "--off-icon-pattern", "<fn=1>\xf240</fn>",
+                                   "--on-icon-pattern", "<fn=1>\xf0e7</fn>",
+                                   "--idle-icon-pattern", "<fn=1>\xf0e7</fn>"
+                                ] 50,
+                      Run Wireless "wlp3s0" [ "-t", "<fn=1>\xf1eb</fn> <quality>%" ] 10,
+                      Run Volume "default" "Master" [
+                                    "-t", "<status> <volume>%",
+                                    "--",
+                                    "-o", "<fn=1>\xf026</fn>",
+                                    "-O", "<fn=1>\xf028</fn>",
+                                    "-C", "#88C0D0"
+                                ] 10,
+                      Run Volume "default" "Capture" [ "-t", ", <volumeipat> <volume>%"
+                                    , "--"       , "--on"                   , "●"   --"[on]"
+                                    , "--off"                   , "●"   --"○"   --"[off]"
+                                    , "--onc"                   , "#783e57"
+                                    , "--offc"                  , "#615772"
+                                    , "--highd"                 , "-5.0"
+                                    , "--lowd"                  , "-30.0"
+                                    , "--volume-icon-pattern"   , "<fn=1>\xf130</fn>"                                                            --, "
+                                ] 10
+                    ]
+       }
