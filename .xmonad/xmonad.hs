@@ -26,7 +26,7 @@ import XMonad.Layout.MultiColumns ( multiCol )
 import XMonad.Layout.Tabbed ( simpleTabbed )
 import XMonad.Layout.ThreeColumns ( ThreeCol (ThreeCol, ThreeColMid) )
 import XMonad.Prompt ( XPPosition (Top), alwaysHighlight, font
-   , position, promptBorderWidth )
+   , position, promptBorderWidth, fgColor, bgColor, height, fgHLight, bgHLight )
 import XMonad.Prompt.ConfirmPrompt ( confirmPrompt )
 import XMonad.Prompt.Shell ( shellPrompt )
 import XMonad.Util.WorkspaceCompare ( getSortByXineramaRule )
@@ -42,6 +42,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.ManageHook
 
+import XMonad.Actions.FloatKeys
 import XMonad.Actions.Submap
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
@@ -90,7 +91,12 @@ myFocusedBorderColor = "#88C0D0"
 myXPConfig = def
   { position          = Top
   , alwaysHighlight   = True
+  , bgColor = "#2E3440"
+  , fgColor = "#88C0D0"
+  , bgHLight = "#88C0D0"
+  , fgHLight = "#2e3440"
   , promptBorderWidth = 0
+  , height = 25
   , font              = "xft:Overpass Display:size=13"
   }
 
@@ -100,13 +106,13 @@ myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "tmux" spawnTerm findTerm manageTerm,
                   NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol")
                      (customFloating $ W.RationalRect (1/4) (1/4) (2/4) (2/4)),
-                  NS "htop" spawnHtop (className =? "htop")
+                  NS "htop" spawnHtop (resource =? "htop")
                      (customFloating $ W.RationalRect (1/4) (1/4) (2/4) (2/4))
 
                 ]
   where
     spawnTerm  = myTerminal ++ " --class terminal -e tmux"
-    spawnHtop  = myTerminal ++ " --class htop,htop -e htop"
+    spawnHtop  = myTerminal ++ " --class htop -e htop"
     findTerm   = resource =? "terminal"
     manageTerm = customFloating $ W.RationalRect l t w h
                where
@@ -211,11 +217,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), confirmPrompt myXPConfig "exit" (io exitSuccess))
 
-    -- launch dmenu
-    , ((modm .|. shiftMask, xK_p     ), spawn "rofi-pass")
-
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_o     ), spawn "rofi -show drun")
 
     -- shutdown menu
     -- , ((modm, xK_a), submap . M.fromList $
@@ -243,12 +244,21 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- control screen brightness
     -- These are the codes the function keys generate on my Lenovo X1 Carbon gen6
     -- xbacklight is in the xorg-xbacklight package in Arch
-    , ((noModMask, xF86XK_MonBrightnessDown), spawn "xbacklight -dec 10")
-    , ((noModMask, xF86XK_MonBrightnessUp  ), spawn "xbacklight -inc 10")
+    -- , ((noModMask, xF86XK_MonBrightnessDown), spawn "xbacklight -dec 10")
+    -- , ((noModMask, xF86XK_MonBrightnessUp  ), spawn "xbacklight -inc 10")
     -- , ((0, xF86XK_AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
     -- , ((0, xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
     -- , ((0, xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
-    ]
+    , ((modm , xK_t), withFocused toggleFloat)
+    , ((modm, xK_Left), withFocused $ keysMoveWindow (-20, 0))
+    , ((modm, xK_Right), withFocused $ keysMoveWindow (20, 0))
+    , ((modm, xK_Up), withFocused $ keysMoveWindow (0, -20))
+    , ((modm, xK_Down), withFocused $ keysMoveWindow (0, 20))
+    , ((modm .|. shiftMask, xK_Left     ), withFocused (keysResizeWindow (-10,-10) (1,1)))
+    , ((modm .|. shiftMask, xK_Right     ), withFocused (keysResizeWindow (10,10) (1,1)))
+    , ((modm .|. shiftMask, xK_Up     ), withFocused (keysAbsResizeWindow (-10,-10) (1024,752)))
+    , ((modm .|. shiftMask, xK_Down     ), withFocused (keysAbsResizeWindow (10,10) (1024,752)))
+        ]
     ++
 
     --
@@ -270,7 +280,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- Swapped w and e because of confusion between nVidia settings for primary and what xmonad sees from xinerama/xrandr
         -- | (key, sc) <- zip [xK_e, xK_w, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
+    where
+    toggleFloat w = windows (\s -> if M.member w (W.floating s)
+                    then W.sink w s
+                    else (W.float w (W.RationalRect (1/6) (1/6) (2/3) (2/3)) s))
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -354,9 +367,9 @@ mySpacing = spacingRaw False
 -- 'className' and 'resource' are used below.
 --
 -- myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
--- myManageHook = namedScratchpadManageHook myScratchPads <+> composeOne
+myManageHook = composeOne
   -- None of these apps are installed on my system now
-  --[ className =? "Pidgin" -?> doFloat
+  [ className =? "@joplin/app-desktop" -?> doFloat
   --, className =? "XCalc"  -?> doFloat
   --, className =? "mpv"    -?> doFloat
   -- [ className =? "Godot"  -?> doFloat
@@ -374,25 +387,7 @@ mySpacing = spacingRaw False
 
   -- Move transient windows to their parent:
   -- , transience
-  -- ]
--- myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
-myManageHook = composeAll
-     -- using 'doShift ( myWorkspaces !! 7)' sends program to workspace 8!
-     -- I'm doing it this way because otherwise I would have to write out
-     -- the full name of my workspaces.
-     [ className =? "htop"    --> doShift ( myWorkspaces !! 7 )
-     , title =? "firefox"     --> doShift ( myWorkspaces !! 1 )
-     -- , className =? "vlc"     --> doShift ( myWorkspaces !! 7 )
-     , className =? "Gimp"    --> doShift ( myWorkspaces !! 8 )
-     , className =? "Gimp"    --> doFloat
-     , title =? "Oracle VM VirtualBox Manager"     --> doFloat
-     , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
-     , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
-     ]
-     -- <+> namedScratchpadManageHook myScratchPads
-
-
--- myManageHook = namedScratchpadManageHook myScratchPads
+  ]
 ------------------------------------------------------------------------
 -- Event handling
 
@@ -424,12 +419,10 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 -- myStartupHook = return ()
--- 2020-05-11 Added specifically because of the black window contents problem
--- with Java Swing apps.
 myStartupHook = do
-                -- spawn "feh --bg-fill ~/Pictures/Wallpaper/matterhorn-big.jpg"
                 spawnOnce "nitrogen --restore"
                 -- spawn "stalonetray"
+                spawnOnce "greenclip daemon"
                 spawnOnce "nextcloud"
                 spawnOnce "sxhkd -m -1 -c ~/.config/sxhkd/sxmonadrc"
                 setWMName "LG3D" -- JVM hack
@@ -445,6 +438,7 @@ myPP = def
   , ppCurrent = currentStyle
   , ppHidden  = visibleStyle
   , ppVisible = visibleStyle
+  , ppSort = fmap (namedScratchpadFilterOutWorkspace .) (ppSort def)
   , ppLayout  = (\layout -> case layout of
       "Tall"        -> "[|]"
       "Mirror Tall" -> "[-]"
