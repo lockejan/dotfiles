@@ -18,9 +18,8 @@ xsetroot -cursor_name left_ptr
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
-session=${1:-xmonad}
+session=${1:-i3}
 case $session in
     i3           ) exec i3;;
-    bspwm        ) exec bspwm;;
     xmonad       ) exec /usr/bin/xmonad;;
 esac

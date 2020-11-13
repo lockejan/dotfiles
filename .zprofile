@@ -4,7 +4,5 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
 elif [[ $(tty) = /dev/tty2 ]]; then
     exec sway --my-next-gpu-wont-be-nvidia
 elif [[ $(tty) = /dev/tty3 ]]; then
-    exec startx ~/.xinitrc i3
-elif [[ $(tty) = /dev/tty4 ]]; then
-    exec startx ~/.xinitrc bspwm
+    exec startx ~/.xinitrc xmonad
 fi

@@ -124,7 +124,7 @@ bar {
            }
     separator_symbol " | "
     tray_output none
-    modifier None
+    modifier Mod1
     position top
     status_command py3status --dbus-notify
 }

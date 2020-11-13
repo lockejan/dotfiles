@@ -23,7 +23,14 @@ import XMonad.Hooks.ManageHelpers
    ( (-?>), composeOne, isDialog, transience )
 import XMonad.Hooks.SetWMName ( setWMName )
 import XMonad.Layout.MultiColumns ( multiCol )
-import XMonad.Layout.Tabbed ( simpleTabbed )
+import XMonad.Layout.Tabbed
+
+import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.Maximize
+import XMonad.Layout.Named
+import XMonad.Layout.TwoPane
+
+-- import XMonad.Layout.WindowNavigation
 import XMonad.Layout.ThreeColumns ( ThreeCol (ThreeCol, ThreeColMid) )
 import XMonad.Prompt ( XPPosition (Top), alwaysHighlight, font
    , position, promptBorderWidth, fgColor, bgColor, height, fgHLight, bgHLight )
@@ -33,6 +40,8 @@ import XMonad.Util.WorkspaceCompare ( getSortByXineramaRule )
 
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Spacing
+import XMonad.Layout.Combo
+import XMonad.Layout.WindowNavigation
 
 -- For xmobar
 import XMonad.Util.Run
@@ -44,7 +53,8 @@ import XMonad.ManageHook
 
 import XMonad.Actions.FloatKeys
 import XMonad.Actions.Submap
-import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.EZConfig
+-- import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 
 -- workspace switching
@@ -188,6 +198,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
+    , ((modm,               xK_f     ), withFocused (sendMessage . maximizeRestore))
     -- Quit xmonad
     -- , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
@@ -217,20 +228,24 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), confirmPrompt myXPConfig "exit" (io exitSuccess))
 
+   , ((modm .|. controlMask .|. shiftMask, xK_Right), sendMessage $ Move R)
+   , ((modm .|. controlMask .|. shiftMask, xK_Left ), sendMessage $ Move L)
+   , ((modm .|. controlMask .|. shiftMask, xK_Up   ), sendMessage $ Move U)
+   , ((modm .|. controlMask .|. shiftMask, xK_Down ), sendMessage $ Move D)
+
 
     -- shutdown menu
-    -- , ((modm, xK_a), submap . M.fromList $
-    --    [ ((0, xK_l), spawn "notify-send 'blurlock'")
-    --    , ((0, xK_s), spawn "blurlock && systemctl suspend")
-    --    , ((0, xK_r), spawn "systemctl reboot")
-    --    , ((0, xK_o), spawn "systemctl poweroff -i")
-    --    ])
-
+    , ((modm, xK_a), modalmap . M.fromList $
+       [ ((0, xK_l), spawn "i3lock")
+       , ((0, xK_s), spawn "blurlock && systemctl suspend")
+       , ((0, xK_r), spawn "systemctl reboot")
+       , ((0, xK_o), spawn "systemctl poweroff -i")
+       ])
     -- launch xscreensaver-command -lock
-    -- , ((modm .|. shiftMask, xK_l     ), spawn "xscreensaver-command -lock")
+    , ((modm .|. shiftMask, xK_l     ), spawn "blurlock")
 
     -- launch xscreensaver-command -lock AND power the monitor down
-    -- , ((modm .|. controlMask, xK_l   ), spawn "xscreensaver-command -lock; sleep 1; xset dpms force off")
+    -- , ((modm .|. controlMask, xK_l   ), spawn "blurlock; sleep 1; xset dpms force off")
 
     -- launch XMonad app prompt
     , ((modm,               xK_p     ), shellPrompt myXPConfig)
@@ -240,6 +255,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
      , ((modm              , xK_i), namedScratchpadAction myScratchPads "htop")
      , ((modm              , xK_u), namedScratchpadAction myScratchPads "tmux")
      , ((modm .|. shiftMask, xK_u), namedScratchpadAction myScratchPads "pavucontrol")
+
 
     -- control screen brightness
     -- These are the codes the function keys generate on my Lenovo X1 Carbon gen6
@@ -315,16 +331,21 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts $
-   smartBorders $
+myLayout =
+   -- maximize $
    -- mySpacing $
+   avoidStruts $
+   smartBorders $
+   -- mkToggle (single MIRROR) $
    tiled |||
-   Mirror tiled |||
-   Full |||
-   multiCol [1] 1 0.01 (-0.5) |||  -- Many equal columns!
-   ThreeCol nmaster delta (1/3) |||  -- Three equal columns with resizing
-   ThreeColMid nmaster delta ratio |||
-   simpleTabbed
+   -- Mirror tiled |||
+   -- Full |||
+   tabbed shrinkText myTabConfig |||
+   -- multiCol [1] 1 0.01 (-0.5) |||  -- Many equal columns!
+   -- ThreeCol nmaster delta (1/3) |||  -- Three equal columns with resizing
+   -- ThreeColMid nmaster delta ratio |||
+   mySplitTabs |||
+   tabbedLeft shrinkText myTabConfig
    where
       -- default tiling algorithm partitions the screen into two panes
       tiled   = Tall nmaster delta ratio
@@ -338,7 +359,22 @@ myLayout = avoidStruts $
       -- Percent of screen to increment by when resizing panes
       delta   = 3/100
 
---------------------------------------------------------------------------------
+--      combo = combineTwo (TwoPane 0.03 0.5) (tabbed shrinkText myTabConfig) (tabbed shrinkText myTabConfig)
+mySplitTabs = named "Split Tab" $ combineTwo (TwoPane (3/100) (1/2)) myTabbed myTabbed
+myTabbed = tabbed shrinkText myTabConfig
+
+myTabConfig = def { activeColor = "#556064"
+                  , inactiveColor = "#2F3D44"
+                  , urgentColor = "#FDF6E3"
+                  , activeBorderColor = "#454948"
+                  , inactiveBorderColor = "#454948"
+                  , urgentBorderColor = "#268BD2"
+                  , activeTextColor = "#80FFF9"
+                  , inactiveTextColor = "#1ABC9C"
+                  , urgentTextColor = "#1ABC9C"
+                  , fontName = "xft:Overpass Display:size=10:antialias=true"
+                  }
+
 -- AESTHETICS
 --------------------------------------------------------------------------------
 
@@ -370,7 +406,8 @@ mySpacing = spacingRaw False
 myManageHook = composeOne
   -- None of these apps are installed on my system now
   [ className =? "@joplin/app-desktop" -?> doFloat
-  --, className =? "XCalc"  -?> doFloat
+  , className =? "Yad"  -?> doFloat
+  , className =? "Zenity"  -?> doFloat
   --, className =? "mpv"    -?> doFloat
   -- [ className =? "Godot"  -?> doFloat
 
@@ -492,6 +529,20 @@ defaults = def {
         logHook            = myLogHook,
         startupHook        = myStartupHook
     }
+    -- `additionalKeysP` addKeys
+
+-- addKeys = [ ("M-e", modalmap . M.fromList $
+    --       [ ((0, xK_r), spawn "rofi -show run -show-icons")
+    --       , ((0, xK_w), spawn "rofi -show window -show-icons")
+    --       , ((0, xK_s), spawn "rofi -show ssh -show-icons")
+    --       , ((0, xK_d), spawn "rofi -show drun -show-icons")
+    --       , ((shiftMask, xK_w), spawn "rofi -show windowcd -show-icons")
+    --       , ((0, xK_c), spawn "rofi -show combi -show-icons")
+    --       , ((0, xK_k), spawn "rofi -show keys -show-icons")
+    --       ])
+
+modalmap :: M.Map (KeyMask, KeySym) (X ()) -> X ()
+modalmap s = submap $ M.map (\x -> x >> modalmap s) s
 
 -- | They keybindings for this config file, accessible via mod-Shift-/
 help :: String
