@@ -67,12 +67,8 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#enabled = 1
 
-" Get rid of trailing Whitespaces
-function TrimWhitespace()
-    %s/\s*$//
-    ''
-:endfunction
-command! Trim call TrimWhitespace()
+" Get rid of trailing Whitespaces on save
+autocmd BufWritePre * %s/\s\+$//e
 
 " Convenient command to see the difference between the current buffer and the:
 " Revert with: ":delcommand DiffOrig".
