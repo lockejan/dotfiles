@@ -7,8 +7,8 @@ super + Escape
     pkill -USR1 -x sxhkd
 
 # Terminal
-super + Return
-    $TERMINAL
+#super + Return
+#    $TERMINAL
 
 # Rofi
 ctrl + space
@@ -21,6 +21,8 @@ mod4 + shift + d
     rofimoji
 mod4 + p
     rofi-pass
+mod4 + udiaeresis
+   rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 {alt,mod4} + Tab
     rofi -show window
 ## Rofi; ssh hosts
@@ -33,7 +35,7 @@ shift + @Print
 @Print
     maim -s -p 0 -c 0.96,0.5,0.09 "${HOME}/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
 
-mod4 + udiaeresis
+mod4 + shift + udiaeresis
     yad --calendar --width=220 --height=180 --undecorated --fixed  --close-on-unfocus --no-buttons  --posx=2100 --posy=30
 
 

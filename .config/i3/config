@@ -133,8 +133,8 @@ bindcode 180 exec firefox
 
 # i3-gaps conf
 for_window [class=".*"] border pixel 3
-gaps inner 7
-gaps outer 7
+# gaps inner 7
+# gaps outer 7
 # smart_gaps on
 smart_borders on
 
@@ -154,6 +154,7 @@ for_window [class="Yad"] floating enable
 # Startup Apps
 exec --no-startup-id nextcloud &
 exec --no-startup-id sxhkd -m -1 &
+exec --no-startup-id greenclip daemon
 # exec --no-startup-id nm-applet
 # exec --no-startup-id blueman-applet
 # exec --no-startup-id imwheel -b 45
