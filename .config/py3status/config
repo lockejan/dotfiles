@@ -4,7 +4,6 @@ general {
     color_bad       = '#D08770'
 	colors = true
 	interval = 1
-	markup = "pango"
 	output_format = "i3bar"
 }
 
@@ -22,7 +21,7 @@ order += "battery all"
 order += "tztime local"
 
 external_script 0 {
-    format = "{output}"
+    format = " {output}"
     script_path = "thesis-timer"
     cache_timeout = 60
 }

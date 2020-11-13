@@ -1,7 +1,5 @@
 # vim: set ft=sxhkdrc:
 
-# 1 Global {{{1                                                         :global:
-# =============
 # Reload sxhkd config
 super + Escape
     pkill -USR1 -x sxhkd
@@ -22,7 +20,7 @@ mod4 + shift + d
 mod4 + p
     rofi-pass
 mod4 + udiaeresis
-   rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+    rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 {alt,mod4} + Tab
     rofi -show window
 ## Rofi; ssh hosts
@@ -51,9 +49,6 @@ super + shift + w
 # Mailer
 mod4 + shift + m
     $TERMINAL -e aerc
-# Spotlight clone
-#mod4 + shift + p
-#    albert show
 
 # Change display
 super + F7
@@ -135,6 +130,10 @@ mod4 + {s,t,e}
 mod4 + shift + space
     i3-msg floating toggle
 
+# toggle status bar
+mod4 + b
+    i3-msg bar mode toggle
+
 # Change focus between tiling and floating windows
 mod4 + space
     i3-msg focus mode_toggle
@@ -162,7 +161,3 @@ mod4 + shift + c
 # i3; restart i3 in-place (preserves layout/session)
 mod4 + shift + r
     i3-msg restart
-
-# i3; exit (ends X session)
-mod4 + shift + e
-    i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'

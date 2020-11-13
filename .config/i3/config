@@ -7,7 +7,7 @@ hide_edge_borders smart
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Overpass Display, FontAwesome5Free, FontAwesome5Brands 13
+font pango:Overpass Display
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -110,6 +110,7 @@ client.background       $nord0
 
 # status bar settings
 bar {
+    font pango:Overpass Display, FontAwesome5Free, FontAwesome5Brands 13
     colors {
             background  $nord0
             statusline  $nord8
@@ -123,6 +124,7 @@ bar {
            }
     separator_symbol " | "
     tray_output none
+    modifier None
     position top
     status_command py3status --dbus-notify
 }
