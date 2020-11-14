@@ -4,8 +4,8 @@ general {
     color_bad       = '#D08770'
 	colors = true
 	interval = 1
-    markup = pango
-	output_format = "i3bar"
+    # markup = pango
+	# output_format = "i3bar"
 }
 
 order += "external_script 1"
@@ -34,7 +34,7 @@ external_script 1 {
 
 wireless _first_ {
 	format_down = ""
-	format_up = " %quality"
+	format_up = "%quality"
 	on_click 1 = "exec nmcli radio wifi on"
 	on_click 3 = "exec nmcli radio wifi off"
 }
@@ -50,7 +50,7 @@ memory {
 }
 
 tztime local {
-    format = " %a, %d.%b    %H:%M"
+    format = " %a, %d.%b   %H:%M"
 }
 
 arch_updates {
@@ -58,7 +58,9 @@ arch_updates {
 }
 
 battery all {
-    format = "%status %percentage"
+    format = "%status %percentage %remaining"
+    integer_battery_capacity = true
+    last_full_capacity = true
     status_full = ""
     status_bat = ""
     status_unk = ""

@@ -9,8 +9,8 @@ super + Escape
 #    $TERMINAL
 
 # Rofi
-ctrl + space
-    rofi -show run
+#ctrl + space
+#    rofi -show run
 mod4 + p
     rofi-pass
 mod4 + d

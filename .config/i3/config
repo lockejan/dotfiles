@@ -7,7 +7,7 @@ hide_edge_borders smart
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Overpass Display
+font pango:JetBrains 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -66,6 +66,9 @@ for_window [instance="dropdown"] move scratchpad
 exec --no-startup-id $term --class dropdown -e tmux
 bindsym $mod+u [instance="dropdown"] scratchpad show
 
+# float current window
+bindsym $mod+y fullscreen disable; floating enable; resize set 600 400; sticky enable; move window to position 1940 54
+
 # Colors
 set_from_resource $nord1 color0 #000000
 set_from_resource $nord3 color8 #000000
@@ -110,7 +113,7 @@ client.background       $nord0
 
 # status bar settings
 bar {
-    font pango:Overpass Display, FontAwesome5Free, FontAwesome5Brands 13
+    font pango:JetBrainsMono, FontAwesome5Free, FontAwesome5Brands 12
     colors {
             background  $nord0
             statusline  $nord8
@@ -122,7 +125,7 @@ bar {
             urgent_workspace   $nord11  $nord0  $nord11
             binding_mode       $nord0   $nord0  $nord14
            }
-    separator_symbol "   "
+    separator_symbol " "
     tray_output none
     modifier Mod1
     position top
