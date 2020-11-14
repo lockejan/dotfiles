@@ -14,7 +14,7 @@ order += "external_script 0"
 order += "bluetooth"
 order += "process_status VPN"
 order += "wireless _first_"
-order += "memory"
+# order += "memory"
 order += "volume_status mic"
 order += "volume_status speakers"
 order += "battery all"
@@ -44,13 +44,15 @@ backlight {
 }
 
 memory {
-    format = " %used"
+    format = " %percentage_used"
     threshold_degraded = "1G"
+    # decimals = 0
+    # integer_memory_usage = true
     format_degraded = "MEMORY < %available"
 }
 
 tztime local {
-    format = " %a, %d.%b   %H:%M"
+    format = " %a %d.%b  %H:%M "
 }
 
 arch_updates {
@@ -96,7 +98,7 @@ volume_status mic {
 volume_status speakers {
 	command = "pactl"
     cache_timeout = 2
-	format = ' '
+	format = ''
 	format_muted = ''
 	button_down = 5
 	button_mute = 1

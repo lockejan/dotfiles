@@ -97,12 +97,15 @@ mod4 + {_,shift +}{Left,Down,Up,Right}
     i3-msg {focus,move} {left,down,up,right}
 
 # switch to workspace or move container to workspace
-mod4 + {_, shift +}{1,2,3,4,5,6,7,8,9}
-    i3-msg {workspace,move container to workspace} {1,2,3,4,5,6,7,8,9}
+mod4 + {_, shift +}{1-9}
+    i3-msg {workspace,move container to workspace} {1-9}
 
 # switch to workspace or move container to workspace using numeric Keypad
-mod4 + {mod2, shift +}{1,2,3,4,5,6,7,8,9}
-    i3-msg {workspace,move container to workspace} {1,2,3,4,5,6,7,8,9}
+mod4 + KP_{1-9}
+    i3-msg move container to workspace {1-9}
+
+mod4 + KP_{End,Down,Next,Left,Begin,Right,Home,Up,Prior}
+    i3-msg workspace {1-9}
 
 # navigate workspaces next / previous
 mod4 + ctrl + {h,l}

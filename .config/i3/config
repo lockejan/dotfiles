@@ -61,10 +61,15 @@ mode "resize" {
 }
 
 # init dropdown windows
-for_window [instance="dropdown"] floating enable
-for_window [instance="dropdown"] move scratchpad
-exec --no-startup-id $term --class dropdown -e tmux
-bindsym $mod+u [instance="dropdown"] scratchpad show
+exec --no-startup-id $term --class htop -e htop
+for_window [instance="htop"] floating enable
+for_window [instance="htop"] move scratchpad
+bindsym $mod+i [instance="htop"] scratchpad show; resize set 2000 1300; move window to position 280 50
+
+exec --no-startup-id $term --class tmux -e tmux
+for_window [instance="tmux"] floating enable
+for_window [instance="tmux"] move scratchpad
+bindsym $mod+u [instance="tmux"] scratchpad show; resize set 2000 1300; move window to position 280 50
 
 # float current window
 bindsym $mod+y fullscreen disable; floating enable; resize set 600 400; sticky enable; move window to position 1940 54
@@ -163,4 +168,5 @@ exec --no-startup-id greenclip daemon
 # exec --no-startup-id nm-applet
 # exec --no-startup-id blueman-applet
 # exec --no-startup-id imwheel -b 45
-exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/matterhorn-big.jpg
+exec --no-startup-id nitrogen --restore
+# exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/matterhorn-big.jpg
