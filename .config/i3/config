@@ -122,7 +122,7 @@ bar {
             urgent_workspace   $nord11  $nord0  $nord11
             binding_mode       $nord0   $nord0  $nord14
            }
-    separator_symbol " | "
+    separator_symbol "   "
     tray_output none
     modifier Mod1
     position top

@@ -4,6 +4,7 @@ general {
     color_bad       = '#D08770'
 	colors = true
 	interval = 1
+    markup = pango
 	output_format = "i3bar"
 }
 
@@ -14,7 +15,6 @@ order += "bluetooth"
 order += "process_status VPN"
 order += "wireless _first_"
 order += "memory"
-# order += "backlight"
 order += "volume_status mic"
 order += "volume_status speakers"
 order += "battery all"
@@ -34,7 +34,7 @@ external_script 1 {
 
 wireless _first_ {
 	format_down = ""
-	format_up = ""
+	format_up = " %quality"
 	on_click 1 = "exec nmcli radio wifi on"
 	on_click 3 = "exec nmcli radio wifi off"
 }
@@ -50,7 +50,7 @@ memory {
 }
 
 tztime local {
-    format = " %a,%d.%m.  %H:%M"
+    format = " %a, %d.%b    %H:%M"
 }
 
 arch_updates {
@@ -61,7 +61,7 @@ battery all {
     format = "%status %percentage"
     status_full = ""
     status_bat = ""
-    status_unk = ""
+    status_unk = ""
     status_chr = ""
 }
 
@@ -81,8 +81,9 @@ bluetooth {
 }
 
 volume_status mic {
-    format = ' {percentage}%'
-    format_muted = ' {percentage}%'
+    format = ''
+    format_muted = ''
+	button_down = 5
 	button_down = 5
 	button_mute = 1
 	button_up = 4
@@ -93,8 +94,8 @@ volume_status mic {
 volume_status speakers {
 	command = "pactl"
     cache_timeout = 2
-	format = ' {percentage}%'
-	format_muted = ' {percentage}%'
+	format = ' '
+	format_muted = ''
 	button_down = 5
 	button_mute = 1
 	button_up = 4
