@@ -5,7 +5,7 @@
 
 numlockx &
 dunst &
-picom &
+picom --xrender-sync-fence &
 gammastep &
 autorandr --change
 # fusuma &

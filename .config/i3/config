@@ -24,9 +24,9 @@ focus_on_window_activation focus
 focus_follows_mouse yes
 
 # Set shut down, restart and locking features
-bindsym $mod+0 mode "$mode_system"
 set $Locker blurlock
 set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+bindsym $mod+0 mode "$mode_system"
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
@@ -41,7 +41,6 @@ mode "$mode_system" {
 }
 
 # resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
 mode "resize" {
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
@@ -60,36 +59,37 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
+mode "focus" {
+        bindsym f [class="firefox|firefoxdeveloperedition" window_role="browser"] focus
+        bindsym c [class="chromium"] focus
+        bindsym v [class="code"] focus
+        bindsym j [class="^jetbrains-.+"] focus
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+
 # init dropdown windows
-exec --no-startup-id $term --class htop -e htop
 for_window [instance="htop"] floating enable
 for_window [instance="htop"] move scratchpad
-bindsym $mod+i [instance="htop"] scratchpad show; resize set 2000 1300; move window to position 280 50
+for_window [instance="htop"] resize set 2000 1300
+for_window [instance="htop"] move window to position 280 50
+bindsym $mod+i [instance="htop"] scratchpad show
 
-exec --no-startup-id $term --class tmux -e tmux
 for_window [instance="tmux"] floating enable
 for_window [instance="tmux"] move scratchpad
-bindsym $mod+u [instance="tmux"] scratchpad show; resize set 2000 1300; move window to position 280 50
+for_window [instance="tmux"] resize set 2000 1300
+for_window [instance="tmux"] move window to position 280 50
+bindsym $mod+u [instance="tmux"] scratchpad show
+
+for_window [instance="spotify"] floating enable; resize set 2000 1300; move window to position 280 50; move scratchpad
+bindsym $mod+o [instance="spotify"] scratchpad show
+# bindsym $mod+Shift+o [instance="discord"] scratchpad show
 
 # float current window
 bindsym $mod+y fullscreen disable; floating enable; resize set 600 400; sticky enable; move window to position 1940 54
 
 # Colors
-set_from_resource $nord1 color0 #000000
-set_from_resource $nord3 color8 #000000
-set_from_resource $nord5 color7 #000000
-set_from_resource $nord6 color15 #000000
-set_from_resource $nord7 color14 #000000
-set_from_resource $nord8 color6 #000000
-set_from_resource $nord9 color12 #000000
-set_from_resource $nord11 color9 #000000
-set_from_resource $nord13 color11 #000000
-set_from_resource $nord14 color10 #000000
-set_from_resource $nord15 color13 #000000
-
-set_from_resource $nord4  foreground #000000
-set_from_resource $nord0  background #000000
-
 set $nord0   #2E3440
 set $nord1   #3B4252
 set $nord2   #434C5E
@@ -132,7 +132,7 @@ bar {
            }
     separator_symbol " "
     tray_output none
-    modifier Mod1
+    modifier none
     position top
     status_command py3status --dbus-notify
 }
@@ -152,21 +152,28 @@ smart_borders on
 # assign [class="firefox|firefoxdeveloperedition" window_role="browser"] 2
 # assign [class="code-oss" window_role="browser-window"] 3
 # assign [class="jetbrains-.*"] 3
-assign [class="discord"] 7
+# assign [class="discord"] 7
 for_window [class="Gnome-pomodoro"] floating enable focus
 for_window [class="Pomodoro"] floating enable
+for_window [class="Pavucontrol"] floating enable
 for_window [class="Gnome-calculator"] floating enable focus
 for_window [class="vlc"] floating enable
 for_window [class="jetbrains-.*" title="win0"] floating enable
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [class="Yad"] floating enable
+# for_window [class="discord"] floating enable; move to scratchpad; scratchpad show
 
 # Startup Apps
+# bindsym $mod+Shift+z exec --no-startup-id $term --class tmux -e tmux
+exec --no-startup-id $term --class htop -e htop
+exec --no-startup-id $term --class tmux -e tmux
 exec --no-startup-id nextcloud &
 exec --no-startup-id sxhkd -m -1 &
 exec --no-startup-id greenclip daemon
+# exec --no-startup-id spotify
+# exec --no-startup-id autorandr -l external-2k
 # exec --no-startup-id nm-applet
 # exec --no-startup-id blueman-applet
-# exec --no-startup-id imwheel -b 45
-exec --no-startup-id nitrogen --restore
-# exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/matterhorn-big.jpg
+exec --no-startup-id imwheel -b 45
+# exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/matterhorn-big.jpg

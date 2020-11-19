@@ -5,7 +5,8 @@
 # Read `man 5 sway` for a complete reference.
 
 # set font
-font pango:Overpass Display, FontAwesome5Free, FontAwesome5Brands 13
+font pango:JetBrains 12
+# font pango:Overpass Display, FontAwesome5Free, FontAwesome5Brands 13
 
 ### Variables
 #
@@ -326,6 +327,7 @@ client.background       $nord0
 # status bar settings
 bar {
     colors {
+            font pango:JetBrainsMono, FontAwesome5Free, FontAwesome5Brands 12
             background  $nord0
             statusline  $nord8
             separator   $nord6
@@ -336,7 +338,7 @@ bar {
             urgent_workspace   $nord11  $nord0  $nord11
             binding_mode       $nord0   $nord0  $nord14
            }
-    separator_symbol " | "
+    separator_symbol "  "
     tray_output none
     position top
     status_command py3status --dbus-notify
@@ -386,11 +388,11 @@ bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
 bindsym Pause exec playerctl play-pause
 
 input * {
-xkb_layout de,de
-xkb_variant ,nodeadkeys
-xkb_numlock enable
-xkb_options grp:alt_shift_toggle
-xkb_options caps:escape
+    xkb_layout de,de
+    xkb_variant ,nodeadkeys
+    xkb_numlock enable
+    xkb_options grp:alt_shift_toggle
+    xkb_options caps:escape
 }
 
 # workspace assign for apps

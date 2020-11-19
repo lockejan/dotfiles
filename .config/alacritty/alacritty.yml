@@ -4,8 +4,8 @@ env:
 window:
   # Specified in number of columns/lines, not pixels.
   dimensions:
-    columns: 140
-    lines: 38
+    columns: 0
+    lines: 0
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
