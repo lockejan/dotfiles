@@ -177,3 +177,4 @@ exec --no-startup-id greenclip daemon
 exec --no-startup-id imwheel -b 45
 # exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/matterhorn-big.jpg
+exec_always --no-startup-id alttab -d 2 -sc 1 -fg "#ECEFF4" -frame "#81A1C1" -bg "#4C566A" -t 128x150 -i 127x64 -w 1 -font xft:JetBrains-12 -s 1 -ck 'space' -pk 'H' -nk 'L'
