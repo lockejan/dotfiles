@@ -114,7 +114,7 @@ volume_status mic {
 volume_status speakers {
 	command = "pactl"
     cache_timeout = 2
-	format = ''
+	format = ' {percentage}%'
 	format_muted = ''
 	button_down = 5
 	button_mute = 1

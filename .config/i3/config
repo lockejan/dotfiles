@@ -59,16 +59,6 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-mode "focus" {
-        bindsym f [class="firefox|firefoxdeveloperedition" window_role="browser"] focus
-        bindsym c [class="chromium"] focus
-        bindsym v [class="code"] focus
-        bindsym j [class="^jetbrains-.+"] focus
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-    }
-
 # init dropdown windows
 for_window [instance="htop"] floating enable
 for_window [instance="htop"] move scratchpad
@@ -84,7 +74,6 @@ bindsym $mod+u [instance="tmux"] scratchpad show
 
 for_window [instance="spotify"] floating enable; resize set 2000 1300; move window to position 280 50; move scratchpad
 bindsym $mod+o [instance="spotify"] scratchpad show
-# bindsym $mod+Shift+o [instance="discord"] scratchpad show
 
 # float current window
 bindsym $mod+y fullscreen disable; floating enable; resize set 600 400; sticky enable; move window to position 1940 54
@@ -132,7 +121,7 @@ bar {
            }
     separator_symbol " "
     tray_output none
-    modifier none
+    # modifier none
     position top
     status_command py3status --dbus-notify
 }
@@ -146,7 +135,7 @@ for_window [class=".*"] border pixel 3
 # gaps inner 7
 # gaps outer 7
 # smart_gaps on
-smart_borders on
+# smart_borders on
 
 # workspace assign for apps
 # assign [class="firefox|firefoxdeveloperedition" window_role="browser"] 2
@@ -161,7 +150,6 @@ for_window [class="vlc"] floating enable
 for_window [class="jetbrains-.*" title="win0"] floating enable
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [class="Yad"] floating enable
-# for_window [class="discord"] floating enable; move to scratchpad; scratchpad show
 
 # Startup Apps
 # bindsym $mod+Shift+z exec --no-startup-id $term --class tmux -e tmux
@@ -175,6 +163,8 @@ exec --no-startup-id greenclip daemon
 # exec --no-startup-id nm-applet
 # exec --no-startup-id blueman-applet
 exec --no-startup-id imwheel -b 45
+exec_always --no-startup-id setxkbmap -option caps:escape
+
 # exec --no-startup-id nitrogen --restore
-exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/matterhorn-big.jpg
+exec_always --no-startup-id xwallpaper --zoom ~/Pictures/Wallpaper/matterhorn-big.jpg
 exec_always --no-startup-id alttab -d 2 -sc 1 -fg "#ECEFF4" -frame "#81A1C1" -bg "#4C566A" -t 128x150 -i 127x64 -w 1 -font xft:JetBrains-12 -s 1 -ck 'space' -pk 'H' -nk 'L'

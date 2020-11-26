@@ -13,7 +13,8 @@ gnome-pomodoro --no-default-window &
 i3-gnome-pomodoro daemon &
 amixer set Capture -q 55%
 disable-dpms &
-xsetroot -cursor_name left_ptr
+# xsetroot -cursor_name left_ptr
+dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK

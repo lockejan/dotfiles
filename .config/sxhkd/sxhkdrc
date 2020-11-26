@@ -21,8 +21,8 @@ mod4 + p
     rofi-pass
 mod4 + udiaeresis
     rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
-mod4 + Tab
-    rofi -show window
+#mod4 + Tab
+#    rofi -show window
 ## Rofi; ssh hosts
 #ctrl + alt + s
 #    rofi -show ssh

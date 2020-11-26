@@ -21,6 +21,12 @@
     "line_length": false
   },
   "python.linting.enabled": true,
+  "python.venvFolders": [
+    "envs",
+    ".pyenv",
+    ".direnv",
+    ".cache/pypoetry/virtualenvs"
+  ],
   "python.linting.pylintEnabled": true,
   "python.jediEnabled": false,
   "java.home": "/usr/lib/jvm/default",

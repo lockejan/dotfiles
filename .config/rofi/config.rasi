@@ -3,7 +3,7 @@ configuration {
     combi-modi: "window,drun,run,ssh";
     terminal: "alacritty";
     run-shell-command: "{terminal} -e {cmd}";
-    modi: "drun,run,ssh,window,clipboard:greenclip print";
+    modi: "drun,run,ssh,clipboard:greenclip print";
 	show-icons: true;
 	ssh-client: "ssh";
 	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";

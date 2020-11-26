@@ -21,6 +21,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'vim-airline/vim-airline'
     " Plug 'wellle/targets.vim'
 " Syntax
+    Plug 'petobens/poet-v',
+    Plug 'hasufell/ghcup.vim',
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'sheerun/vim-polyglot'
 " Color-schemes
@@ -37,6 +39,10 @@ source $HOME/.config/nvim/plugin-settings/coc.vim
 source $HOME/.config/nvim/plugin-settings/markdow-preview.vim
 
 autocmd! bufwritepost $VIMRC source $VIMRC
+
+let g:poetv_executables = ['poetry']
+let g:poetv_auto_activate = 1
+let g:poetv_set_environment = 1
 
 " Neoformat
 let g:neoformat_enabled_python = ['autopep8']
@@ -109,3 +115,6 @@ endfunction
 "     autocmd!
 "     autocmd VimEnter * NERDTree | wincmd p
 " augroup END
+
+" open ghcup in the current buffer
+nnoremap <Leader>r :GHCup<CR>

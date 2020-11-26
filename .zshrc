@@ -31,6 +31,7 @@ alias i3c="$EDITOR ~/.config/i3/config"
 alias sxc="$EDITOR ~/.config/sxhkd/sxhkdrc"
 alias dps="docker ps"
 alias dpsa="docker ps -a"
+alias conda="/opt/miniconda3/bin/conda"
 alias chrome="google-chrome-stable"
 alias la="exa -la"
 alias lh="exa -lh"
@@ -40,15 +41,10 @@ alias reload="source ~/.zshrc && zinit self-update"
 alias sipvpn="sudo -A openvpn --config ~/.config/openvpn/telearbeit"
 alias swayc="$EDITOR ~/.config/sway/config"
 alias tx=tmuxinator
-alias update="yay && zinit self-update && nvim +PlugUpdate +qall"
+alias yup="yay -Syu --answerdiff=None --nocleanmenu --nodiffmenu && zinit self-update && nvim +PlugUpdate +qall"
 alias vc="$EDITOR $VIMRC"
 alias vf='$EDITOR $(fzf)'
 alias zc="$EDITOR ~/.zshrc"
-
-# haskell stack completion for zsh
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-eval "$(stack --bash-completion-script stack)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

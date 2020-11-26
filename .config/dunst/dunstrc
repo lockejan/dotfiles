@@ -79,12 +79,12 @@
     close = ctrl+space
     # Close all notifications.
     close_all = ctrl+shift+space
-    history = ctrl+dead_grave
+    history = ctrl+dead_acute
     # Context menu.
     context = ctrl+shift+period
 
     [urgency_low]
-    frame_color = "#A3BE8C"
+    frame_color = "#5E81AC"
     background = "#3B4252"
     foreground = "#ECEFF4"
     timeout = 3
