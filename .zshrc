@@ -6,6 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 source /etc/zsh/zpreztorc
+# source ~/.zpreztorc
 source /usr/lib/prezto/init.zsh
 source /usr/lib/prezto/runcoms/zshrc
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
