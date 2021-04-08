@@ -29,22 +29,24 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 alias vifm='~/.config/vifm/scripts/vifmrun'
 alias i3c="$EDITOR ~/.config/i3/config"
 alias sxc="$EDITOR ~/.config/sxhkd/sxhkdrc"
-alias dps="docker ps"
-alias dpsa="docker ps -a"
+alias vc="$EDITOR $VIMRC"
+alias zc="$EDITOR ~/.zshrc"
+alias vf='$EDITOR $(fzf)'
+
 alias conda="/opt/miniconda3/bin/conda"
 alias chrome="google-chrome-stable"
+
 alias la="exa -la"
 alias lh="exa -lh"
 alias ll="exa -l"
 alias ls="exa"
+
 alias reload="source ~/.zshrc && zinit self-update"
 alias sipvpn="sudo -A openvpn --config ~/.config/openvpn/telearbeit"
-alias swayc="$EDITOR ~/.config/sway/config"
 alias tx=tmuxinator
-alias yup="yay -Syu --answerdiff=None --nocleanmenu --nodiffmenu && zinit self-update && nvim +PlugUpdate +qall"
-alias vc="$EDITOR $VIMRC"
-alias vf='$EDITOR $(fzf)'
-alias zc="$EDITOR ~/.zshrc"
+alias yup="yay -Syu --nocleanmenu --nodiffmenu && zinit self-update && nvim +PlugUpdate +qall"
+
+export PATH="$PATH:/opt/miniconda3/bin/"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -70,8 +72,7 @@ zinit light-mode for \
     zinit-zsh/z-a-patch-dl \
     zinit-zsh/z-a-bin-gem-node \
     zdharma/fast-syntax-highlighting \
-    zsh-users/zsh-autosuggestions \
-    darvid/zsh-poetry
+    zsh-users/zsh-autosuggestions
 
 ### End of Zinit's installer chunk
 zinit load zdharma/history-search-multi-word

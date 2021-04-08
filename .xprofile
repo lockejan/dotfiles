@@ -1,5 +1,5 @@
 setxkbmap de
-setxkbmap -option caps:escape
+setxkbmap -option ctrl:nocaps
 
 /* export EDITOR="nvim" */
 /* export VISUAL="nvim" */

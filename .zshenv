@@ -1,9 +1,3 @@
-# pyenv
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-
 # nvm
 # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -12,7 +6,7 @@ export SUDO_ASKPASS="$HOME/bin/askpass-rofi"
 export JAVA_HOME=/usr/lib/jvm/default
 
 # GO DIR
-# export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:$HOME/go/bin"
 export GOPATH="$HOME/go"
 
 # deno bin path
@@ -29,3 +23,13 @@ export INDICATOR="/usr/share/sounds/gnome/defaults/alerts/drip.ogg"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PATH=$PATH:"$HOME/.local/bin":"$HOME/bin"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# npm
+PATH="$HOME/.node_modules/bin:$PATH"
+export npm_config_prefix=~/.node_modules
