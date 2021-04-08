@@ -14,10 +14,9 @@ Config {
        , allDesktops = True
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %StdinReader% }{ %pom% <fc=#ffffff>|</fc>  <fn=2></fn> %thesis%  <fc=#ffffff>|</fc>  %memory%  <fc=#ffffff>|</fc>  <action=`pavucontrol`>%default:Master% %default:Capture%</action>  <fc=#ffffff>|</fc>  %wlp3s0wi%  <fc=#ffffff>|</fc>  %battery%  <fc=#ffffff>|</fc> <action=`yadcal`>%date%</action>"
+       , template = " %StdinReader% }{ %pom% <fc=#ffffff>|</fc>  %memory%  <fc=#ffffff>|</fc>  <action=`pavucontrol`>%default:Master% %default:Capture%</action>  <fc=#ffffff>|</fc>  %wlp3s0wi%  <fc=#ffffff>|</fc>  %battery%  <fc=#ffffff>|</fc> <action=`yadcal`>%date%</action>"
        , commands = [ Run Date "<fn=1>\xf073</fn> %a %b %_d <fn=1>\xf017</fn> %H:%M " "date" 10,
                       Run StdinReader,
-                      Run Com "python" ["/home/schmitt/bin/thesis-timer"] "thesis" 20,
                       Run Com "zsh" ["/home/schmitt/.xmobar/vpn"] "vpn" 15,
                       Run Com "zsh" ["/home/schmitt/.xmobar/pomodoro"] "pom" 15,
                       -- bluetooth, openvpn, input sink volume, memory

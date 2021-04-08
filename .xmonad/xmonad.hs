@@ -107,7 +107,8 @@ myXPConfig = def
   , fgHLight = "#2e3440"
   , promptBorderWidth = 0
   , height = 25
-  , font              = "xft:Overpass Display:size=13"
+  , font              = "xft:JetBrains:size=13"
+  -- , font              = "xft:Overpass Display:size=13"
   }
 
 -----------------------------------------------------------------------------
@@ -206,7 +207,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ((modm .|. shiftMask, xK_i ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+    -- , ((modm .|. shiftMask, xK_i ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
 
 
     -- Added by user
@@ -457,10 +458,11 @@ myLogHook = return ()
 -- By default, do nothing.
 -- myStartupHook = return ()
 myStartupHook = do
-                spawnOnce "nitrogen --restore"
-                -- spawn "stalonetray"
+                spawnOnce "xwallpaper --zoom ~/Pictures/Wallpaper/matterhorn-big.jpg"
+                -- spawnOnce "nitrogen --restore"
+                spawn "stalonetray"
+                spawnOnce "nm-applet"
                 spawnOnce "greenclip daemon"
-                spawnOnce "nextcloud"
                 spawnOnce "sxhkd -m -1 -c ~/.config/sxhkd/sxmonadrc"
                 setWMName "LG3D" -- JVM hack
 
