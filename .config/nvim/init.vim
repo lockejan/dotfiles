@@ -2,57 +2,53 @@
 call plug#begin('~/.config/nvim/plugged')
 " Tools
     Plug 'airblade/vim-gitgutter'
-    Plug 'airblade/vim-rooter'
-    Plug 'bling/vim-bufferline'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-    Plug 'junegunn/fzf.vim',
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    " Plug 'airblade/vim-rooter'
+    " Plug 'bling/vim-bufferline'
+    " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+    " Plug 'junegunn/fzf.vim',
+    " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/gv.vim'
-    Plug 'lambdalisue/suda.vim'
     Plug 'mihaifm/bufstop'
     Plug 'rbgrouleff/bclose.vim'
+    Plug 'christoomey/vim-tmux-navigator'
     " Plug 'sbdchd/neoformat'
-    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-surround'
-"    Plug 'unkiwii/vim-nerdtree-sync'
-"    Plug 'vifm/vifm.vim'
+    Plug 'mhinz/vim-startify'
+    " Plug 'tpope/vim-surround'
+    " Plug 'tpope/vim-vinegar'
+    " Plug 'vifm/vifm.vim'
     Plug 'vim-airline/vim-airline'
     " Plug 'wellle/targets.vim'
 " Syntax
-    Plug 'petobens/poet-v',
-    Plug 'hasufell/ghcup.vim',
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'sheerun/vim-polyglot'
+    Plug 'kamailio/vim-kamailio-syntax'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug 'neovim/nvim-lspconfig'
+    " Plug 'nvim-lua/completion-nvim'
 " Color-schemes
+    Plug 'flazz/vim-colorschemes'
     Plug 'arcticicestudio/nord-vim',
-    Plug 'morhetz/gruvbox'
 call plug#end()
 
 "---------------Plugin settings------------------------
 source $HOME/.config/nvim/plugin-settings/snips.vim
 source $HOME/.config/nvim/plugin-settings/custom-keybindings.vim
 source $HOME/.config/nvim/plugin-settings/better-defaults.vim
-source $HOME/.config/nvim/plugin-settings/fzf.vim
 source $HOME/.config/nvim/plugin-settings/coc.vim
-source $HOME/.config/nvim/plugin-settings/markdow-preview.vim
+" source $HOME/.config/nvim/plugin-settings/nvim-lsp.vim
+" source $HOME/.config/nvim/plugin-settings/fzf.vim
+" source $HOME/.config/nvim/plugin-settings/markdow-preview.vim
+
+nmap <C-P> :FZF<CR>
+
+if(has("termguicolors"))
+    set termguicolors     " enable true colors support
+endif
 
 autocmd! bufwritepost $VIMRC source $VIMRC
 
-let g:poetv_executables = ['poetry']
-let g:poetv_auto_activate = 1
-let g:poetv_set_environment = 1
-
-" Neoformat
-let g:neoformat_enabled_python = ['autopep8']
-" augroup fmt
-"   autocmd!
-"   autocmd BufWritePre *.{py,ts,js} Neoformat
-" augroup END
-
-let g:ormolu_ghc_opt=["TypeApplications", "RankNTypes"]
-let g:python3_host_prog="/home/schmitt/.pyenv/versions/neovim3/bin/python"
+let g:python3_host_prog="/home/schmitt/.pyenv/shims/python"
 
 " Git-Gutter
 let g:gitgutter_enabled = 1
@@ -62,16 +58,13 @@ nmap ) <Plug>(GitGutterNextHunk)
 nmap ( <Plug>(GitGutterPrevHunk)
 
 " Color settings
+" colorscheme visualstudio
 colorscheme nord
-set background=dark
-hi! Normal ctermbg=NONE guibg=NONE
 
 " Statusline config
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1
 
 " Get rid of trailing Whitespaces on save
 autocmd BufWritePre * %s/\s\+$//e
@@ -83,38 +76,8 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
     \ | wincmd p | diffthis
 endif
 
-" NERDTREE settings
-nmap <C-n> :NERDTreeToggle<CR>
-nmap ,m :NERDTreeToggle<CR>
-nmap ,n :NERDTreeFind<CR>
+"write readonly file
+ cmap w!! w !sudo tee % >/dev/null
 
-let g:plug_window = 'noautocmd vertical topleft new'
-let NERDTreeShowHidden=1
-
-" If more than one window and previous buffer was NERDTree, go back to it.
-"autocmd BufRead * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
-
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-
-" Highlight currently open buffer in NERDTree
-" autocmd BufRead * call SyncTree()
-"autocmd BufRead * call SyncTree()
-
-" augroup nerdtree_open
-"     autocmd!
-"     autocmd VimEnter * NERDTree | wincmd p
-" augroup END
-
-" open ghcup in the current buffer
-nnoremap <Leader>r :GHCup<CR>
+"secure gopass
+au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile

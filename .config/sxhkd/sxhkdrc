@@ -11,8 +11,6 @@ super + Escape
 # Rofi
 #ctrl + space
 #    rofi -show run
-mod4 + p
-    rofi-pass
 mod4 + d
     rofi -show drun
 mod4 + shift + d

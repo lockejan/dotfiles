@@ -17,8 +17,8 @@ py3status{
 # order += "tomodoro"
 order += "spotify"
 order += "external_script 1"
-order += "external_script 0"
-order += "arch_updates"
+# order += "external_script 0"
+# order += "arch_updates"
 order += "bluetooth"
 order += "process_status VPN"
 order += "wireless _first_"
@@ -27,6 +27,11 @@ order += "volume_status mic"
 order += "volume_status speakers"
 order += "battery all"
 order += "tztime local"
+
+# tomodoro {
+#     cache_timeout = 1
+#     }
+#
 
 external_script 0 {
     format = " {output}"
@@ -71,8 +76,10 @@ tztime local {
 }
 
 arch_updates {
-    hide_if_zero = True
+    hide_if_zero = False
     format = " {total}"
+    cache_timeout = 600
+	on_click 1 = "exec --no-startup-id $TERMINAL -e yay -Syu --nocleanmenu --nodiffmenu"
 }
 
 battery all {

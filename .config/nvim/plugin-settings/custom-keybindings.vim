@@ -25,10 +25,10 @@ vnoremap <leader>p "_dP
 nnoremap <leader>p "0p
 
 " split movemment
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 "resize split
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
@@ -103,16 +103,6 @@ inoremap <C-f> <Right>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 inoremap <C-d> <Delete>
-
-" Command mode shortcut
-cnoremap <C-h> <BS>
-cnoremap <C-j> <Down>
-cnoremap <C-k> <Up>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-cnoremap <C-d> <Delete>
 
 " jj | escaping
 inoremap jj <Esc>

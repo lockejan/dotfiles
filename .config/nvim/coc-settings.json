@@ -31,6 +31,7 @@
   "python.jediEnabled": false,
   "java.home": "/usr/lib/jvm/default",
   "yaml.format.enable": true,
+  "yaml.format.singleQuote": true,
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",
@@ -43,6 +44,31 @@
         "hie.yaml"
       ],
       "filetypes": ["haskell", "lhaskell"]
+    },
+    "dockerfile": {
+    "command": "docker-langserver",
+    "filetypes": ["dockerfile"],
+    "args": ["--stdio"]
+  },
+    "bash": {
+    "command": "bash-language-server",
+    "args": ["start"],
+    "filetypes": ["sh"],
+    "ignoredRootPaths": ["~"]
+  },
+    "golang": {
+    "command": "gopls",
+    "rootPatterns": ["go.mod"],
+    "disableWorkspaceFolders": true,
+    "filetypes": ["go"]
+  },
+    "intelephense": {
+    "command": "intelephense",
+    "args": ["--stdio"],
+    "filetypes": ["php"],
+    "initializationOptions": {
+      "storagePath": "/tmp/intelephense"
     }
+  }
   }
 }

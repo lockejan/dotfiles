@@ -1,6 +1,7 @@
 -- vim:syntax=haskell
 Config {
-        font = "xft:Overpass Display:size=13"
+        --font = "xft:Overpass Display:size=13"
+        font = "xft:JetBrains:size=12"
        , additionalFonts = ["xft:Font Awesome:size=12","xft:Font Awesome 5 Free Solid:size=12", "xft:Font Awesome 5 Brands:size=12"]
        , bgColor = "#2E3440"
        , fgColor = "#88C0D0"

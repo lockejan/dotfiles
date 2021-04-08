@@ -54,8 +54,8 @@
     sticky_history = yes
     history_length = 20
     startup_notification = false
-    # dmenu = /usr/bin/dmenu -p dunst:
-    dmenu = /usr/bin/rofi -dmenu -p dunst:
+    dmenu = /usr/bin/dmenu -p dunst:
+    # dmenu = /usr/bin/rofi -dmenu -p dunst:
 
     browser = /usr/bin/firefox -new-tab
 

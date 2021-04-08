@@ -398,7 +398,7 @@ input * {
 # workspace assign for apps
 assign [class="Firefox"] $ws2
 assign [class="Code"] $ws3
-assign [class="jetbrains-*-ce"] $ws4
+assign [class="jetbrains-*-ce"] $ws3
 for_window [class="Gnome-pomodoro"] floating enable focus
 for_window [class="Gnome-calculator"] floating enable focus
 for_window [class="Pomodoro"] floating enable

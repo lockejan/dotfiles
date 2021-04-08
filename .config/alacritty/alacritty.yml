@@ -14,7 +14,7 @@ window:
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
-  decorations: none
+  decorations: full
 
   # Window class (Linux/BSD only):
   class:
@@ -55,7 +55,7 @@ font:
     family: JetBrainsMono Nerd Font
     style: Bold Italic
   # Point size
-  size: 11
+  size: 12
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -104,7 +104,7 @@ colors:
 cursor:
   style: Block
 
-background_opacity: 0.95
+background_opacity: 1.0
 #selection:
 #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 save_to_clipboard: true
