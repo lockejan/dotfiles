@@ -1,25 +1,27 @@
 "set autochdir                           " Your working directory will always be the same as your working directory
 set autoindent
 set autoread		" auto re-read files if unmodified inside Vim
-set backspace=indent,eol,start
+" set backspace=indent,eol,start
 " set clipboard=unnamedplus               " Copy paste between vim and everything else
 " set clipboard="+
 set confirm
 set cursorline
 set encoding=UTF-8
 set expandtab    " Tabs are spaces, not tabs
+set shiftwidth=4
 set formatoptions-=cro                  " Stop newline continution of comments
 set history=50		" keep 50 lines of command line history
-set hlsearch                   " Highlight search terms
+set hidden "no warning when switching between unsaved buffers
+set nohlsearch                   " No Highlight search terms
 set ignorecase     " Case insensitive search
 set incsearch                  " Find as you type search
 set laststatus=2	" always display the status bar
 set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
-set mouse=a                    " Automatically enable mouse usage
+" set mouse=a                    " Automatically enable mouse usage
 set number
-set pumheight=20         " makes popup menu smaller
+" set pumheight=20         " makes popup menu smaller
 set ruler		" show the cursor position all the time
-set scrolloff=3    " Minumum lines to keep above and below cursor
+set scrolloff=8    " Minumum lines to keep above and below cursor
 set shiftround		" shifting lines round the indentation to the nearest multiple of "shiftwidth"
 set shiftwidth=4   " Use indents of 4 spaces
 set shortmess=atOI " No help Uganda information, and overwrite read messages to avoid PRESS ENTER prompts
@@ -38,6 +40,8 @@ set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 set title	 	" set windows title
 set whichwrap+=<,>,h,l  " Allow backspace and cursor keys to cross line boundaries
 set wildmenu		" disply cline tan complete options as a menu
+
+set colorcolumn=80
 
 syntax on                      " Syntax highlighting
 filetype plugin indent on      " Automatically detect file types

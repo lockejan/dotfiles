@@ -2,12 +2,9 @@
 call plug#begin('~/.config/nvim/plugged')
 " Tools
     Plug 'airblade/vim-gitgutter'
-    " Plug 'airblade/vim-rooter'
+    Plug 'airblade/vim-rooter'
     " Plug 'bling/vim-bufferline'
     " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-    " Plug 'junegunn/fzf.vim',
-    " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/gv.vim'
     Plug 'mihaifm/bufstop'
     Plug 'rbgrouleff/bclose.vim'
     Plug 'christoomey/vim-tmux-navigator'
@@ -17,24 +14,28 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'mhinz/vim-startify'
     " Plug 'tpope/vim-surround'
     " Plug 'tpope/vim-vinegar'
-    " Plug 'vifm/vifm.vim'
     Plug 'vim-airline/vim-airline'
     " Plug 'wellle/targets.vim'
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    Plug 'p00f/nvim-ts-rainbow',
+    "undo tree
+    "nvim lsp
 " Syntax
     Plug 'sheerun/vim-polyglot'
     Plug 'kamailio/vim-kamailio-syntax'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " Plug 'neovim/nvim-lspconfig'
-    " Plug 'nvim-lua/completion-nvim'
 " Color-schemes
-    Plug 'flazz/vim-colorschemes'
+    Plug 'gruvbox-community/gruvbox',
     Plug 'arcticicestudio/nord-vim',
 call plug#end()
 
 "---------------Plugin settings------------------------
-source $HOME/.config/nvim/plugin-settings/snips.vim
 source $HOME/.config/nvim/plugin-settings/custom-keybindings.vim
 source $HOME/.config/nvim/plugin-settings/better-defaults.vim
+source $HOME/.config/nvim/plugin-settings/snips.vim
 source $HOME/.config/nvim/plugin-settings/coc.vim
 " source $HOME/.config/nvim/plugin-settings/nvim-lsp.vim
 " source $HOME/.config/nvim/plugin-settings/fzf.vim
@@ -56,10 +57,17 @@ let g:gitgutter_map_keys = 0
 
 nmap ) <Plug>(GitGutterNextHunk)
 nmap ( <Plug>(GitGutterPrevHunk)
+nmap <leader>ph <Plug>(GitGutterPreviewHunk)
+nmap <leader>ghs <Plug>(GitGutterStageHunk)
+nmap <leader>ghu <Plug>(GitGutterUndoHunk)
 
 " Color settings
-" colorscheme visualstudio
 colorscheme nord
+" colorscheme gruvbox
+highligh Normal guibg=none
+
+" yate -> dosini syntax
+autocmd BufNewFile,BufRead *.conf set syntax=dosini
 
 " Statusline config
 let g:airline#extensions#tabline#enabled = 1
@@ -69,15 +77,47 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Get rid of trailing Whitespaces on save
 autocmd BufWritePre * %s/\s\+$//e
 
-" Convenient command to see the difference between the current buffer and the:
-" Revert with: ":delcommand DiffOrig".
-if !exists(":DiffOrig")
-command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-    \ | wincmd p | diffthis
-endif
-
 "write readonly file
  cmap w!! w !sudo tee % >/dev/null
 
 "secure gopass
 au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using lua functions
+" nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+" nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+" nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = { "javascript" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "c", "rust" },  -- list of language that will be disabled
+  },
+}
+EOF
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    custom_captures = {
+      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+      ["foo.bar"] = "Identifier",
+    },
+  },
+    rainbow = {
+    enable = true,
+    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+  },
+}
+EOF

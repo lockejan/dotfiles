@@ -9,12 +9,15 @@
     "json",
     "python"
   ],
+  "coc.preferences.snippets.enable": true,
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
+  "eslint.probe": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "html",
+      "vue"
   ],
   "markdownlint.config": {
     "default": true,
@@ -29,7 +32,6 @@
   ],
   "python.linting.pylintEnabled": true,
   "python.jediEnabled": false,
-  "java.home": "/usr/lib/jvm/default",
   "yaml.format.enable": true,
   "yaml.format.singleQuote": true,
   "languageserver": {
