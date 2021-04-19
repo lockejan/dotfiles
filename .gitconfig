@@ -1,0 +1,56 @@
+[user]
+	name = Jan Schmitt
+    email = git@smittie.de
+[includeIf "gitdir:~/git/sipgate/"]
+	Path = ~/.git_sipgate
+[alias]
+	br = branch
+	branch-name = "!git rev-parse --abbrev-ref HEAD"
+	bd = branch -d
+	bdr = push origin --delete
+	cm = commit
+	cma = commit --amend
+	co = checkout
+	cob = switch -c
+	di = diff
+	ds = diff --staged
+	history = log --follow --patch
+	; lg = log --pretty=oneline
+	lgf = log --graph --abbrev-commit --decorate --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)<%an>%C(reset)%n %C(dim black)%s%C(reset) %C(dim white) - %an%C(reset)' --all
+	lg = log --graph --date=human --pretty=format:'%C(bold blue)%h %C(yellow)%d%Creset %s %Cgreen(%ad) %C(cyan)<%an>%Creset' --all
+    lg-fancier = log --graph --pretty=format:'%C(yellow)%d%Creset %C(cyan)%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short --all
+	praise = blame
+	push = "!git push -u origin $(git branch-name)"
+	st = status
+	unstage = reset HEAD --
+[core]
+	editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	quotepath = false
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = red
+[core]
+	excludesfile = ~/.ignore
+[diff]
+	tool = vimdiff3
+[difftool "vimdiff3"]
+	path = nvim
+[fetch]
+	prune = true
+[init]
+	defaultBranch = main
+[merge]
+	tool = vimdiff3
+    conflictstyle = merge
+    conflictstyle = diff3
+[pull]
+    ff = only
+	rebase = merges
+[rebase]
+	autostash = true
