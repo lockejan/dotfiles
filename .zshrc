@@ -11,6 +11,7 @@ source /usr/lib/prezto/init.zsh
 source /usr/lib/prezto/runcoms/zshrc
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 DEFAULT_USER=schmitt
 
@@ -73,8 +74,15 @@ zinit light-mode for \
     zinit-zsh/z-a-patch-dl \
     zinit-zsh/z-a-bin-gem-node \
     zdharma/fast-syntax-highlighting \
-    zsh-users/zsh-autosuggestions
+    zsh-users/zsh-autosuggestions \
+    matthieusb/zsh-sdkman
 
 ### End of Zinit's installer chunk
 zinit load zdharma/history-search-multi-word
 zinit load agkozak/zsh-z
+
+JAVA_HOME="$HOME/.sdkman/candidates/java/current"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

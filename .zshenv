@@ -3,7 +3,7 @@
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 export SUDO_ASKPASS="$HOME/bin/askpass-rofi"
-export JAVA_HOME=/usr/lib/jvm/default
+# export JAVA_HOME=/usr/lib/jvm/default
 
 # GO DIR
 export PATH="$PATH:$HOME/go/bin"
@@ -25,10 +25,10 @@ export VISUAL="nvim"
 export PATH=$PATH:"$HOME/.local/bin":"$HOME/bin"
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # npm
 PATH="$HOME/.node_modules/bin:$PATH"
