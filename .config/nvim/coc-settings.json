@@ -1,4 +1,11 @@
 {
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.keyMappings.global": {
+    "<cr>": ["expandable?", "expand", "open"],
+    "v": "open:vsplit"
+  },
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
@@ -12,13 +19,17 @@
   "coc.preferences.snippets.enable": true,
   "eslint.autoFixOnSave": true,
   "eslint.probe": [
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      "html",
-      "vue"
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "vue"
   ],
+  "java.import.gradle.enabled": true,
+  "java.completion.importOrder": ["java", "javax", "com", "org"],
+  "java.codeGeneration.toString.codeStyle": "STRING_CONCATENATION",
+  "java.signatureHelp.enabled": true,
   "markdownlint.config": {
     "default": true,
     "line_length": false
@@ -48,29 +59,29 @@
       "filetypes": ["haskell", "lhaskell"]
     },
     "dockerfile": {
-    "command": "docker-langserver",
-    "filetypes": ["dockerfile"],
-    "args": ["--stdio"]
-  },
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    },
     "bash": {
-    "command": "bash-language-server",
-    "args": ["start"],
-    "filetypes": ["sh"],
-    "ignoredRootPaths": ["~"]
-  },
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
     "golang": {
-    "command": "gopls",
-    "rootPatterns": ["go.mod"],
-    "disableWorkspaceFolders": true,
-    "filetypes": ["go"]
-  },
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "disableWorkspaceFolders": true,
+      "filetypes": ["go"]
+    },
     "intelephense": {
-    "command": "intelephense",
-    "args": ["--stdio"],
-    "filetypes": ["php"],
-    "initializationOptions": {
-      "storagePath": "/tmp/intelephense"
+      "command": "intelephense",
+      "args": ["--stdio"],
+      "filetypes": ["php"],
+      "initializationOptions": {
+        "storagePath": "/tmp/intelephense"
+      }
     }
-  }
   }
 }

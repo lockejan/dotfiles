@@ -6,7 +6,6 @@
 
 
 ##### clojure
-pom.xml
 pom.xml.asc
 *.jar
 *.class

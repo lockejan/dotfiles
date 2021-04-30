@@ -47,6 +47,7 @@ if(has("termguicolors"))
     set termguicolors     " enable true colors support
 endif
 
+" Source config immidiately after saving
 autocmd! bufwritepost $VIMRC source $VIMRC
 
 let g:python3_host_prog="/home/schmitt/.pyenv/shims/python"
@@ -63,7 +64,6 @@ nmap <leader>ghu <Plug>(GitGutterUndoHunk)
 
 " Color settings
 colorscheme nord
-" colorscheme gruvbox
 highligh Normal guibg=none
 
 " yate -> dosini syntax
@@ -77,47 +77,5 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Get rid of trailing Whitespaces on save
 autocmd BufWritePre * %s/\s\+$//e
 
-"write readonly file
- cmap w!! w !sudo tee % >/dev/null
-
 "secure gopass
 au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
-
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-" Using lua functions
-" nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-" nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-" nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-" nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = { "javascript" }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "c", "rust" },  -- list of language that will be disabled
-  },
-}
-EOF
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
-  },
-    rainbow = {
-    enable = true,
-    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-  },
-}
-EOF
