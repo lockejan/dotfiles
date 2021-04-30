@@ -5,10 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source /etc/zsh/zpreztorc
-# source ~/.zpreztorc
-source /usr/lib/prezto/init.zsh
-source /usr/lib/prezto/runcoms/zshrc
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
@@ -80,8 +76,6 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 zinit load zdharma/history-search-multi-word
 zinit load agkozak/zsh-z
-
-JAVA_HOME="$HOME/.sdkman/candidates/java/current"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
