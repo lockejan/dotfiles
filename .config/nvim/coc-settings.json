@@ -26,10 +26,13 @@
     "html",
     "vue"
   ],
+  "java.autobuild.enabled": true,
   "java.import.gradle.enabled": true,
+  "java.completion.enabled": true,
   "java.completion.importOrder": ["java", "javax", "com", "org"],
   "java.codeGeneration.toString.codeStyle": "STRING_CONCATENATION",
   "java.signatureHelp.enabled": true,
+  "java.saveActions.organizeImports": true,
   "markdownlint.config": {
     "default": true,
     "line_length": false

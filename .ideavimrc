@@ -1,4 +1,8 @@
 set clipboard+=unnamed
+set ideajoin
+
+""" Map leader to space ---------------------
+let mapleader=" "
 
 " delete without yanking
 nnoremap <leader>d "_dd
@@ -22,8 +26,6 @@ set incsearch
 map Q gq
 "inoremap jj <Esc>
 
-""" Map leader to space ---------------------
-"let mapleader=" "
 
 """ Plugins  --------------------------------
 set surround
@@ -42,7 +44,7 @@ set ReplaceWithRegister
 "set showmode
 "set so=5
 "set incsearch
-set nu
+"set nu
 
 """ Idea specific settings ------------------
 "set idearefactormode=keep
