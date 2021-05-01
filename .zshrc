@@ -17,7 +17,7 @@ DISABLE_AUTO_UPDATE="true"
 
 DISABLE_UPDATE_PROMPT="true"
 
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 COMPLETION_WAITING_DOTS="true"
 
@@ -29,7 +29,7 @@ alias i3c="$EDITOR ~/.config/i3/config"
 alias sxc="$EDITOR ~/.config/sxhkd/sxhkdrc"
 alias vc="$EDITOR $VIMRC"
 alias zc="$EDITOR ~/.zshrc"
-alias vf='$EDITOR $(fzf)'
+alias vf='$EDITOR $(fzf --height 40%)'
 
 alias conda="/opt/miniconda3/bin/conda"
 alias chrome="google-chrome-stable"
@@ -44,8 +44,6 @@ alias sipvpn="sudo -A openvpn --config ~/.config/openvpn/telearbeit"
 alias tx=tmuxinator
 alias yup="yay -Syu --nocleanmenu --nodiffmenu && zinit self-update && nvim +PlugUpdate +qall"
 
-export PATH="$PATH:/opt/miniconda3/bin/"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -58,6 +56,8 @@ if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
