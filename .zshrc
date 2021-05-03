@@ -65,15 +65,12 @@ autoload -Uz _zinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node \
     zdharma/fast-syntax-highlighting \
     zsh-users/zsh-autosuggestions \
     matthieusb/zsh-sdkman
 
 ### End of Zinit's installer chunk
+zinit light Aloxaf/fzf-tab
 zinit load zdharma/history-search-multi-word
 zinit load agkozak/zsh-z
 
