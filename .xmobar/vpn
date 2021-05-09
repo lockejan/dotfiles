@@ -1,0 +1,10 @@
+#! /bin/zsh
+. $HOME/.xmobar/icons
+
+STATUS=$(pgrep openvpn)
+
+if [ -z $STATUS  ]; then
+  echo -e "$ICON_VPN_DOWN"
+else
+  echo -e "$ICON_VPN_UP"
+fi

@@ -1,0 +1,15 @@
+-- -*- mode: haskell -*-
+Config { font =  "xft:Dejavu Sans:size=9:antialias=true:hinting=true:hintstyle=hintfull"
+       , border = NoBorder
+       , position = TopW L 90
+       , lowerOnStart = False
+       , commands = [ Run UnsafeStdinReader,  Run BatteryP ["BAT0"]
+                  ["-t", "<acstatus>"
+                  , "-L", "10", "-H", "80"
+                  , "-l", "red", "-h", "green"
+                  , "--", "-O", "↑<left>%", "-o", "↓<left>%", "-i", "•<left>%"
+                  ] 10 ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%UnsafeStdinReader% }{%battery%   %date%"
+       }
