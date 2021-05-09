@@ -1,0 +1,11 @@
+[Unit]
+Description=Xcape init
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/xcape -e 'Caps_Lock=Escape'
+
+[Install]
+WantedBy=graphical-session.target

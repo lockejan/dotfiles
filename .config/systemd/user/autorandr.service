@@ -1,0 +1,10 @@
+[Unit]
+Description=Execute autorandr on startup/login
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/autorandr --change
+
+[Install]
+WantedBy=graphical-session.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=Unload driver for integrated ir cam which is only usable for windows as of now
+
+[Service]
+Type=simple
+ExecStart=/home/schmitt/bin/disable-ir-cam
+
+[Install]
+WantedBy=default.target
