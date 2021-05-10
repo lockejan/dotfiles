@@ -77,3 +77,36 @@ zinit load agkozak/zsh-z
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# fd - cd to selected directory
+fdir() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# fda - including hidden directories
+fda() {
+  local dir
+  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# for fzf '**' shell completions.
+# - The first argument to the function ($1) is the base path to start traversal
+_fzf_compgen_path() {
+  command fd --hidden --follow --exclude .git --exclude node_modules . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  command fd --type d --hidden --follow --exclude .git --exclude node_modules . "$1"
+}
+
+# Enable fuzzy search key bindings and auto completion
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export FZF_DEFAULT_COMMAND='find .'
+export FZF_DEFAULT_COMMAND='fd .'
+
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
