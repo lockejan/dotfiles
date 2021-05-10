@@ -1,0 +1,15 @@
+# /home/schmitt/.config/tmuxinator/zendesk.yml
+
+name: zendesk
+root: ~/git/study/explore-zendesk/
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+startup_window: editor
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - vim
+        - jupyter notebook
+        - ll
