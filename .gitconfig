@@ -27,6 +27,7 @@
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=4 -RFX
 	quotepath = false
+	excludesfile = ~/.ignore
 [color]
   branch = auto
   diff = auto
@@ -35,8 +36,6 @@
   added = green
   changed = yellow
   untracked = red
-[core]
-	excludesfile = ~/.ignore
 [diff]
 	tool = vimdiff3
 [difftool "vimdiff3"]

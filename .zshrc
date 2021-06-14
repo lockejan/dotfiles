@@ -31,7 +31,7 @@ alias vc="$EDITOR $VIMRC"
 alias zc="$EDITOR ~/.zshrc"
 alias vf='$EDITOR $(fzf --height 40%)'
 
-alias conda="/opt/miniconda3/bin/conda"
+# alias conda="/opt/miniconda3/bin/conda"
 alias chrome="google-chrome-stable"
 
 alias la="exa -la"
@@ -62,6 +62,8 @@ source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
+autoload -Uz compinit
+compinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
@@ -70,9 +72,9 @@ zinit light-mode for \
     matthieusb/zsh-sdkman
 
 ### End of Zinit's installer chunk
-zinit light Aloxaf/fzf-tab
 zinit load zdharma/history-search-multi-word
 zinit load agkozak/zsh-z
+zinit light Aloxaf/fzf-tab
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -110,3 +112,15 @@ _fzf_compgen_dir() {
 export FZF_DEFAULT_COMMAND='fd .'
 
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
