@@ -42,7 +42,7 @@ alias ls="exa"
 alias reload="source ~/.zshrc && zinit self-update"
 alias sipvpn="sudo -A openvpn --config ~/.config/openvpn/telearbeit"
 alias tx=tmuxinator
-alias yup="yay -Syu --nocleanmenu --nodiffmenu && zinit self-update && nvim +PlugUpdate +qall"
+alias yup="yay -Syu --nocleanmenu --nodiffmenu && zinit self-update && zinit update && nvim +PlugUpdate +qall"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
